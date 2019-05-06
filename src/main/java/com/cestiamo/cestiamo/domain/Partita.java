@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.crypto.Data;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -21,8 +21,8 @@ public class Partita {
     @Column(name = "DATA",  length = 16)
     private Date data;
 
-    @Column(name = "ORARIO", nullale = false)
-    private
+    @Column(name = "ORARIO")
+    private Time orario;
 
     @Column(name = "TIP_PART", nullable = false)
     private TipoPartita tipologia;
@@ -42,5 +42,13 @@ public class Partita {
     public void setData(Date data){
         this.data = data;
     }
+
+    public Time getOrario() {
+        return orario; }
+
+    public void setOrario ( Time ora ){
+        this.orario = ora;
+    }
+
 
 }
