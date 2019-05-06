@@ -10,8 +10,8 @@ import java.util.Date;
 @Entity
 @Table(name = "Partita")
 public class Partita {
-    @Id
 
+    @Id
     @Column(name = "ID_PARTITA", nullable = false)
     private Long id;
 
@@ -24,8 +24,9 @@ public class Partita {
     @Column(name = "ORARIO")
     private Time orario;
 
-    @Column(name = "TIP_PART", nullable = false)
+    @Column(name = "TIP_PARTITA", nullable = false)
     private TipoPartita tipologia;
+
 
     public Long getId() {
         return id;
@@ -50,5 +51,7 @@ public class Partita {
         this.orario = ora;
     }
 
-
+    public void setTipologia(TipoPartita tipologia) {
+        this.tipologia = tipologia;
+    }
 }

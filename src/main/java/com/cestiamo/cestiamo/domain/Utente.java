@@ -115,6 +115,8 @@ public class Utente {
 		return voto_m;
 	}
 
+	public void setVoto_m(int voto_m) {this.voto_m = voto_m;}
+
 	public byte[] getImg() {
 		return img;
 	}
@@ -146,8 +148,11 @@ public class Utente {
 		return id.equals(utente.id);
 	}
 
+	/*
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, getFamiglia());
 	}
+
+	 */
 }
