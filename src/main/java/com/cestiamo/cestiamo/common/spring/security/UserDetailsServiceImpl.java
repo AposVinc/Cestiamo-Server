@@ -15,8 +15,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private CestiamoService service;
 
 	@Override
-	public UserDetails loadUserByUsername(String cognome) throws UsernameNotFoundException {
-		Utente utente = service.findUtenteByCognome(cognome);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Utente utente = service.findUtenteByEmail(email);
 		if (utente == null) {
 			throw new UsernameNotFoundException("utente inesistente");
 		}

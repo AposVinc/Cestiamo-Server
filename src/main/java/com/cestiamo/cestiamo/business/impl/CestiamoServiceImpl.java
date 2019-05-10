@@ -16,13 +16,13 @@ public class CestiamoServiceImpl implements CestiamoService {
 	private UtenteRepository utenteRepository;
 
 	@Override
-	public Utente findUtenteByCognome(String cognome) throws BusinessException {
-		return utenteRepository.findByCognome(cognome);
+	public Utente findUtenteByEmail(String email) throws BusinessException {
+		return utenteRepository.findUtenteByEmail(email);
 	}
 
 	@Override
 	public Utente updateProfilo(Utente profilo) throws BusinessException {
-		Utente utente = utenteRepository.findByCognome(profilo.getCognome());
+		Utente utente = utenteRepository.findUtenteByEmail(profilo.getEmail());
 		utente.setEmail(profilo.getEmail());
 		return utente;
 	}

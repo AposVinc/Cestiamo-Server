@@ -4,7 +4,7 @@ import com.cestiamo.cestiamo.domain.Utente;
 
 public interface CestiamoService {
 
-	Utente findUtenteByCognome(String cognome) throws BusinessException;
+	Utente findUtenteByEmail(String email) throws BusinessException;
 
 	Utente updateProfilo(Utente utente) throws BusinessException;
 

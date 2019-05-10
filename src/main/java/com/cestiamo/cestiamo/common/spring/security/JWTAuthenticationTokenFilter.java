@@ -40,7 +40,6 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
 		}
 
 		if (userDetails != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
 			// Ricostruisco l'userdetails con i dati contenuti nel token
 			// controllo integrita' token
 			if (jwtTokenUtil.validateToken(authToken, userDetails)) {
