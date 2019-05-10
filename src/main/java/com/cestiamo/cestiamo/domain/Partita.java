@@ -15,8 +15,7 @@ public class Partita {
     @Column(name = "ID_PARTITA", nullable = false)
     private Long id;
 
-    @Column(name = "CAMPO", nullable = false)
-    private Campo luogo;
+
 
     @Column(name = "DATA",  length = 16)
     private Date data;
@@ -24,8 +23,7 @@ public class Partita {
     @Column(name = "ORARIO")
     private Time orario;
 
-    @Column(name = "TIP_PARTITA", nullable = false)
-    private TipoPartita tipologia;
+
 
 
     public Long getId() {
@@ -51,7 +49,5 @@ public class Partita {
         this.orario = ora;
     }
 
-    public void setTipologia(TipoPartita tipologia) {
-        this.tipologia = tipologia;
-    }
+
 }

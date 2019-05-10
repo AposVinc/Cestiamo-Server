@@ -1,15 +1,10 @@
 package com.cestiamo.cestiamo.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "utente")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TIPOLOGIA_UTENTE", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("utente")
 public class Utente {
 
 	@Id
@@ -26,7 +21,6 @@ public class Utente {
 	@Column(name = "EMAIL", nullable = false, length = 255)
 	private String email;
 
-	@JsonIgnore
 	@Column(name = "PASSWORD", nullable = false, length = 255)
 	private String password;
 
