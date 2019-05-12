@@ -1,15 +1,15 @@
 package com.cestiamo.cestiamo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Campo")
 public class Campo {
-    @Id
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CAMPO", nullable = false)
     private Long id;
 
@@ -21,6 +21,10 @@ public class Campo {
 
     @Column(name = "TELEFONO", length = 20)
     private String telefono;
+/*
+    @OneToMany(mappedBy = "tipopartita")
+    private Set<Partita> partite = new HashSet<Partita>();
+*/
 
     public Long getId() {
         return id;

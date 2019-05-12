@@ -1,24 +1,25 @@
 package com.cestiamo.cestiamo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TipoPartita")
 public class TipoPartita {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_TIPO_PARTITA", nullable = false)
     private Long id;
 
-    @Column(name = "NOME", nullable = false, length = 255)
-    private String nome;
+    @Enumerated(EnumType.STRING)
+    private EnumTipoP nome;
 
     @Column(name = "NUMERO_GIOCATORI", length = 255, nullable = false)
     private int n_giocatori;
-
-
+/*
+    @OneToMany(mappedBy = "tipopartita")
+    private Set<Partita> partite = new HashSet<Partita>();
+*/
     public Long getId() {
         return id;
     }
@@ -27,11 +28,11 @@ public class TipoPartita {
         this.id = id;
     }
 
-    public String getNome() {
+    public EnumTipoP getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(EnumTipoP nome) {
         this.nome = nome;
     }
 
