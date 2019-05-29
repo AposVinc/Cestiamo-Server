@@ -73,7 +73,7 @@ public class CestiamoApplication {
 			campoRepository.save(c1);
 			campoRepository.save(c2);
 
-			
+
 			Partita p1 = new Partita();
 			p1.setLuogo(c1);
 			Date dataPartita1 = new Date(System.currentTimeMillis());

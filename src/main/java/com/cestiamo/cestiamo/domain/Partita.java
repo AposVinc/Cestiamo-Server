@@ -3,6 +3,8 @@ package com.cestiamo.cestiamo.domain;
 import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Partita")
@@ -27,6 +29,17 @@ public class Partita {
     @JoinColumn(name = "ID_TIPO_PARTITA", nullable = false)
     private TipoPartita tipologia;
 
+    @OneToMany(mappedBy = "partita")
+    private Set<Bacheca> bachecas = new HashSet<Bacheca>();
+
+    public Partita (){}
+
+    public Partita (Campo luogo, Date data, Time orario, TipoPartita tipologia){
+        this.luogo = luogo;
+        this.data = data;
+        this.orario = orario;
+        this.tipologia = tipologia;
+    }
 
     public Long getId() {
         return id;

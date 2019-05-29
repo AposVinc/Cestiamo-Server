@@ -21,10 +21,7 @@ public class Campo {
 
     @Column(name = "TELEFONO", length = 20)
     private String telefono;
-/*
-    @OneToMany(mappedBy = "tipopartita")
-    private Set<Partita> partite = new HashSet<Partita>();
-*/
+
 
     public Long getId() {
         return id;
