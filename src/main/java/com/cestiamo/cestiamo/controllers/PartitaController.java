@@ -24,7 +24,7 @@ public class PartitaController
     @GetMapping("/getListaPartite")
     public List<PartitaResponse> getPartite() {
         List<Partita> l = cestiamoService.findAllPartite();
-        List<PartitaResponse> list = new ArrayList<>();
+        ArrayList<PartitaResponse> list = new ArrayList<>();
 
         l.forEach(partita -> {
             PartitaResponse p = new PartitaResponse(partita);

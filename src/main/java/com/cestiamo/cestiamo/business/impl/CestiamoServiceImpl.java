@@ -2,8 +2,8 @@ package com.cestiamo.cestiamo.business.impl;
 
 import com.cestiamo.cestiamo.business.BusinessException;
 import com.cestiamo.cestiamo.business.CestiamoService;
-import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
+import com.cestiamo.cestiamo.business.impl.repositories.*;
+import com.cestiamo.cestiamo.domain.Campo;
 import com.cestiamo.cestiamo.domain.Partita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,17 @@ public class CestiamoServiceImpl implements CestiamoService {
     @Autowired
     private PartitaRepository partitaRepository;
 
+    @Autowired
+    private CampoRepository campoRepository;
+
     @Override
     public List<Partita> findAllPartite () throws BusinessException {
         return partitaRepository.findAll();
+    }
+
+    @Override
+    public List<Campo> findAllCampi () throws BusinessException {
+        return campoRepository.findAll();
     }
 
 
