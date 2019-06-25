@@ -33,4 +33,10 @@ public class PartitaController
         return list;
     }
 
+    @CrossOrigin()
+    @GetMapping("/nuovaPartita")
+    public void createPartita(@RequestBody Partita p){
+        partitaRepository.save(p);
+    }
+
 }
