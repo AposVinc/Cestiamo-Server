@@ -10,4 +10,6 @@ public interface CestiamoService {
     List<Partita> findAllPartite() throws BusinessException;
 
     List<Campo> findAllCampi() throws BusinessException;
+
+    Partita findPartitaById(long id) throws BusinessException;
 }
