@@ -41,5 +41,5 @@ public class PartitaController
 
 
     @GetMapping("/getPartita/{id}")
-    public Partita findById(Long id){ return cestiamoService.findPartitaById(id); }
+    public Partita findById(@PathVariable Long id){ return cestiamoService.findPartitaById(id); }
 }
