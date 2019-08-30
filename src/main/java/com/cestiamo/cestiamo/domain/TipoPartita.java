@@ -11,8 +11,8 @@ public class TipoPartita {
     @Column(name = "ID_TIPO_PARTITA", nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private EnumTipoP nome;
+    @Column(name = "TIPOLOGIA_PARTITA", length = 255, nullable = false)
+    private String nome;
 
     @Column(name = "NUMERO_GIOCATORI", length = 255, nullable = false)
     private int n_giocatori;
@@ -28,11 +28,11 @@ public class TipoPartita {
         this.id = id;
     }
 
-    public EnumTipoP getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(EnumTipoP nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 

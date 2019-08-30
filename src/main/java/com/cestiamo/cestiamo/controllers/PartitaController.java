@@ -39,7 +39,6 @@ public class PartitaController
         partitaRepository.save(p);
     }
 
-
     @GetMapping("/getPartita/{id}")
     public Partita CercaId(@PathVariable Long id){ return cestiamoService.findPartitaById(id); }
 

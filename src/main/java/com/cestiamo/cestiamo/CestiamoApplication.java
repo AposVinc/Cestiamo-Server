@@ -1,14 +1,14 @@
 package com.cestiamo.cestiamo;
 
-import com.cestiamo.cestiamo.business.impl.repositories.CampoRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.TipoPartitaRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
+import com.cestiamo.cestiamo.business.impl.repositories.*;
 import com.cestiamo.cestiamo.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.sql.Time;
 import java.sql.Date;
@@ -17,6 +17,9 @@ import java.util.Calendar;
 @SpringBootApplication
 public class CestiamoApplication {
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Bean
 	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository, CampoRepository campoRepository, PartitaRepository partitaRepository) {
 		return (args) -> {
@@ -24,7 +27,7 @@ public class CestiamoApplication {
 			mrossi.setNome("Mario");
 			mrossi.setCognome("Rossi");
 			mrossi.setEmail("aaa.aa@aaa.it");
-			mrossi.setPassword("Mario");
+			mrossi.setPassword(passwordEncoder.encode("Mario"));
 			mrossi.setCitta("Roma");
 			mrossi.setD_nascita(new Date(System.currentTimeMillis() + (20 * 86400000)));
 			mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
@@ -34,23 +37,23 @@ public class CestiamoApplication {
 
 
 			TipoPartita unovsuno = new TipoPartita();
-			unovsuno.setNome(EnumTipoP.UNOvUNO);
+			unovsuno.setNome(EnumTipoP.UNOvUNO.label);
 			unovsuno.setN_giocatori(2);
 
 			TipoPartita duevsdue = new TipoPartita();
-			duevsdue.setNome(EnumTipoP.DUEvsDUE);
+			duevsdue.setNome(EnumTipoP.DUEvsDUE.label);
 			duevsdue.setN_giocatori(4);
 
 			TipoPartita trevstre = new TipoPartita();
-			trevstre.setNome(EnumTipoP.TREvsTRE);
+			trevstre.setNome(EnumTipoP.TREvsTRE.label);
 			trevstre.setN_giocatori(6);
 
 			TipoPartita quattrovsquattro = new TipoPartita();
-			quattrovsquattro.setNome(EnumTipoP.QUATTROvsQUATTRO);
+			quattrovsquattro.setNome(EnumTipoP.QUATTROvsQUATTRO.label);
 			quattrovsquattro.setN_giocatori(8);
 
 			TipoPartita cinquevscinque = new TipoPartita();
-			cinquevscinque.setNome(EnumTipoP.CINQUEvsCINQUE);
+			cinquevscinque.setNome(EnumTipoP.CINQUEvsCINQUE.label);
 			cinquevscinque.setN_giocatori(10);
 
 			tipoPartitaRepository.save(unovsuno);

@@ -41,6 +41,8 @@ public class Utente {
 	private byte[] img;
 
 
+	public Long getId_utente() { return id;	}
+
 	public Long getId() {
 		return id;
 	}

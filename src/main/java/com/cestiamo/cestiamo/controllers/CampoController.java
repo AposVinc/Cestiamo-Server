@@ -21,8 +21,7 @@ public class CampoController {
     @CrossOrigin
     @GetMapping("/getListaCampi")
     public ArrayList<Campo> getCampi() {
-        ArrayList<Campo> list = new ArrayList<Campo>(cestiamoService.findAllCampi());
-        return list;
+        return new ArrayList<>(cestiamoService.findAllCampi());
     }
 
 }

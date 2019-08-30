@@ -5,6 +5,8 @@ import com.cestiamo.cestiamo.business.CestiamoService;
 import com.cestiamo.cestiamo.business.impl.repositories.*;
 import com.cestiamo.cestiamo.domain.Campo;
 import com.cestiamo.cestiamo.domain.Partita;
+import com.cestiamo.cestiamo.domain.TipoPartita;
+import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,15 @@ public class CestiamoServiceImpl implements CestiamoService {
     @Autowired
     private CampoRepository campoRepository;
 
+    @Autowired
+    private TipoPartitaRepository tipoPartitaRepository;
+
+
+    @Override
+    public Utente findUtenteByEmail(String email)throws BusinessException{
+        return utenteRepository.findUtenteByEmail(email);
+    }
+
     @Override
     public List<Partita> findAllPartite () throws BusinessException {
         return partitaRepository.findAll();
@@ -32,6 +43,11 @@ public class CestiamoServiceImpl implements CestiamoService {
     @Override
     public List<Campo> findAllCampi () throws BusinessException {
         return campoRepository.findAll();
+    }
+
+    @Override
+    public List<TipoPartita> findAllTypeMatch () throws BusinessException {
+        return tipoPartitaRepository.findAll();
     }
 
     @Override
