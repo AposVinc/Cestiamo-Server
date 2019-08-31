@@ -12,7 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Time;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @SpringBootApplication
 public class CestiamoApplication {
@@ -22,18 +24,29 @@ public class CestiamoApplication {
 
 	@Bean
 	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository, CampoRepository campoRepository, PartitaRepository partitaRepository) {
-		return (args) -> {
-			Utente mrossi = new Utente();
-			mrossi.setNome("Mario");
-			mrossi.setCognome("Rossi");
-			mrossi.setEmail("aaa.aa@aaa.it");
-			mrossi.setPassword(passwordEncoder.encode("Mario"));
-			mrossi.setCitta("Roma");
-			mrossi.setD_nascita(new Date(System.currentTimeMillis() + (20 * 86400000)));
-			mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
-			mrossi.setVoto_m(4);
 
-			utenteRepository.save(mrossi);
+		return (args) -> {
+
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+
+			try {
+				Utente mrossi = new Utente();
+				mrossi.setNome("Mario");
+				mrossi.setCognome("Rossi");
+				mrossi.setEmail("aaa.aa@aaa.it");
+				mrossi.setPassword(passwordEncoder.encode("123456789"));
+				mrossi.setCitta("Roma");
+				mrossi.setD_nascita(formatter.format(new GregorianCalendar(1990, Calendar.JULY, 21).getTime()));
+				mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
+				mrossi.setVoto_m(4);
+				mrossi.setImg(new byte[0]);
+				System.out.println("CREATO Mario Rossi");
+				utenteRepository.save(mrossi);
+				System.out.println("SALVATO Mario Rossi");
+			} catch (Exception ex) {
+				System.out.println("ERROR");
+			}
+			System.out.println("Utenti salvati"+'\n');
 
 
 			TipoPartita unovsuno = new TipoPartita();
