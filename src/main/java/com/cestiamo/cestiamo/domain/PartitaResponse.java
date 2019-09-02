@@ -1,36 +1,32 @@
 package com.cestiamo.cestiamo.domain;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 public class PartitaResponse {
-    private Campo luogo;
+    private Campo campo;
     private Date data;
-    private Time orario;
     private TipoPartita tipologia;
 
 
-    public PartitaResponse(Campo luogo1, Date data1, Time orario1, TipoPartita tipologia1){
-        this.luogo = luogo1;
+    public PartitaResponse(Campo luogo1, Date data1, TipoPartita tipologia1){
+        this.campo = luogo1;
         this.data = data1;
-        this.orario = orario1;
         this.tipologia = tipologia1;
     }
 
     public PartitaResponse(Partita p){
-        this.luogo = p.getLuogo();
+        this.campo = p.getCampo();
         this.data = p.getData();
-        this.orario = p.getOrario();
         this.tipologia = p.getTipologia();
     }
 
 
-    public Campo getLuogo() {
-        return luogo;
+    public Campo getCampo() {
+        return campo;
     }
 
-    public void setLuogo(Campo luogo) {
-        this.luogo = luogo;
+    public void setCampo(Campo campo) {
+        this.campo = campo;
     }
 
     public Date getData(){
@@ -39,14 +35,6 @@ public class PartitaResponse {
 
     public void setData(Date data){
         this.data = data;
-    }
-
-    public Time getOrario() {
-        return orario;
-    }
-
-    public void setOrario ( Time ora ) {
-        this.orario = ora;
     }
 
     public TipoPartita getTipologia(){

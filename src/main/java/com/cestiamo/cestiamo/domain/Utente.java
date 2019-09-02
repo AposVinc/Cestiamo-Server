@@ -28,7 +28,7 @@ public class Utente {
 	private String citta;
 
 	@Column(name = "NASCITA",  length = 16)
-	private String d_nascita;
+	private Date d_nascita;
 
 	@Column(name = "N_PARTITA", length = 255)
 	private int n_partita;
@@ -91,11 +91,11 @@ public class Utente {
 		this.citta = citta;
 	}
 
-	public String getD_nascita() {
+	public Date getD_nascita() {
 		return d_nascita;
 	}
 
-	public void setD_nascita(String d_nascita) {
+	public void setD_nascita(Date d_nascita) {
 		this.d_nascita = d_nascita;
 	}
 

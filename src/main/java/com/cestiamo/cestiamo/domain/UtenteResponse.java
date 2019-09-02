@@ -1,5 +1,7 @@
 package com.cestiamo.cestiamo.domain;
 
+import java.util.Date;
+
 public class UtenteResponse {
 
     private Long id;
@@ -8,7 +10,7 @@ public class UtenteResponse {
     private String email;
     private String password;
     private String citta;
-    private String d_nascita;
+    private Date d_nascita;
     private int n_partita;
     private int voto_m;
     private String img;
@@ -78,11 +80,11 @@ public class UtenteResponse {
         this.citta = citta;
     }
 
-    public String getD_nascita() {
+    public Date getD_nascita() {
         return d_nascita;
     }
 
-    public void setD_nascita(String d_nascita) {
+    public void setD_nascita(Date d_nascita) {
         this.d_nascita = d_nascita;
     }
 

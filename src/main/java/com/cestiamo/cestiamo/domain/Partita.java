@@ -1,8 +1,8 @@
 package com.cestiamo.cestiamo.domain;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,13 +17,10 @@ public class Partita {
 
     @ManyToOne
     @JoinColumn(name = "ID_CAMPO", nullable = false)
-    private Campo luogo;
+    private Campo campo;
 
     @Column(name = "DATA")
     private Date data;
-
-    @Column(name = "ORARIO")
-    private Time orario;
 
     @ManyToOne
     @JoinColumn(name = "ID_TIPO_PARTITA", nullable = false)
@@ -34,10 +31,9 @@ public class Partita {
 
     public Partita (){}
 
-    public Partita (Campo luogo, Date data, Time orario, TipoPartita tipologia){
-        this.luogo = luogo;
+    public Partita (Campo campo, Date data, TipoPartita tipologia){
+        this.campo = campo;
         this.data = data;
-        this.orario = orario;
         this.tipologia = tipologia;
     }
 
@@ -49,12 +45,12 @@ public class Partita {
         this.id = id;
     }
 
-    public Campo getLuogo() {
-        return luogo;
+    public Campo getCampo() {
+        return campo;
     }
 
-    public void setLuogo(Campo luogo) {
-        this.luogo = luogo;
+    public void setCampo(Campo campo) {
+        this.campo = campo;
     }
 
     public Date getData(){
@@ -63,14 +59,6 @@ public class Partita {
 
     public void setData(Date data){
         this.data = data;
-    }
-
-    public Time getOrario() {
-        return orario;
-    }
-
-    public void setOrario ( Time ora ) {
-        this.orario = ora;
     }
 
     public TipoPartita getTipologia(){
