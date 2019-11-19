@@ -27,7 +27,7 @@ public class CestiamoApplication {
 				Utente mrossi = new Utente();
 				mrossi.setNome("Mario");
 				mrossi.setCognome("Rossi");
-				mrossi.setEmail("aaa.aa@aaa.it");
+				mrossi.setEmail("mario.rossi@mail.it");
 				mrossi.setPassword(passwordEncoder.encode("123456789"));
 				mrossi.setCitta("Roma");
                 mrossi.setD_nascita(new GregorianCalendar(1990, Calendar.MARCH,25).getTime());// day of month salva 24 in DB
