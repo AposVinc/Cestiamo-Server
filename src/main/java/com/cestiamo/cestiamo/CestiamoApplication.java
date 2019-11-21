@@ -114,10 +114,16 @@ public class CestiamoApplication {
                 p2.setData(new GregorianCalendar(2019, Calendar.OCTOBER,14,19,12).getTime());
                 p2.setTipologia(t.get(1));
 
+                Partita p3 = new Partita();
+                p3.setCampo(c.get(1));
+                p3.setData(new GregorianCalendar(2019, Calendar.OCTOBER,14,19,12).getTime());
+                p3.setTipologia(t.get(4));
+
                 System.out.println("CREATI ");
 
                 partitaRepository.save(p1);
                 partitaRepository.save(p2);
+                partitaRepository.save(p3);
 
                 System.out.println("SALVATI ");
             } catch (Exception ex) {
