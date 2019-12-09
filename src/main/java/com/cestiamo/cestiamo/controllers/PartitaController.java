@@ -5,6 +5,7 @@ import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.PartitaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,6 +41,6 @@ public class PartitaController
     }
 
     @GetMapping("/getPartita/{id}")
-    public Partita CercaId(@PathVariable Long id){ return cestiamoService.findPartitaById(id); }
+    public Partita findById(@PathVariable Long id){ return cestiamoService.findPartitaById(id); }
 
 }

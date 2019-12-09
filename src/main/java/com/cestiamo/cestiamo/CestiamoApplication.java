@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -82,17 +83,23 @@ public class CestiamoApplication {
                 Campo c1 = new Campo();
                 c1.setCitta("Roma");
                 c1.setVia("Via dei Tulipani, 2");
-                c1.setTelefono("3471234567");
+                c1.setTelefono("347 1234567");
 
                 Campo c2 = new Campo();
                 c2.setCitta("Avezzano");
                 c2.setVia("Via XX Settempre, 150");
-                c2.setTelefono("3472345678");
+                c2.setTelefono("347 2345678");
+
+                Campo c3 = new Campo();
+                c3.setCitta("L'Aquila");
+                c3.setVia("Via Della Croce Rossa, 75");
+                c3.setTelefono("328 4141250");
 
                 System.out.println("CREATI campi ");
 
                 campoRepository.save(c1);
                 campoRepository.save(c2);
+                campoRepository.save(c3);
 
                 System.out.println("SALVATI ");
             } catch (Exception ex) {
@@ -106,7 +113,7 @@ public class CestiamoApplication {
             try {
                 Partita p1 = new Partita();
                 p1.setCampo(c.get(0));
-                p1.setData(new GregorianCalendar(2019, Calendar.NOVEMBER,25,22,12).getTime());
+                p1.setData(new GregorianCalendar(2019, Calendar.NOVEMBER,25,22,15).getTime());
                 p1.setTipologia(t.get(0));
 
                 Partita p2 = new Partita();
@@ -116,7 +123,7 @@ public class CestiamoApplication {
 
                 Partita p3 = new Partita();
                 p3.setCampo(c.get(1));
-                p3.setData(new GregorianCalendar(2019, Calendar.OCTOBER,14,19,12).getTime());
+                p3.setData(new GregorianCalendar(2020, Calendar.MARCH,30,19,12).getTime());
                 p3.setTipologia(t.get(4));
 
                 System.out.println("CREATI ");
@@ -130,6 +137,16 @@ public class CestiamoApplication {
                 System.out.println("ERROR");
             }
             System.out.println("salvati"+'\n');
+
+
+            /*for (int i =0; i < 10; i++) {
+                Partita partita = new Partita();
+                partita.setCampo(c.get(i));
+                Date dataPartita = new Date(System.currentTimeMillis() - (i * 86400000));
+                partita.setData(dataPartita);
+                System.out.println("ciclo partita"+'\n');
+            }*/
+
 
 		};
 	}
