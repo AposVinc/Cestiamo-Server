@@ -144,11 +144,4 @@ public class Utente {
 		return id.equals(utente.id);
 	}
 
-	/*
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, getFamiglia());
-	}
-
-	 */
 }

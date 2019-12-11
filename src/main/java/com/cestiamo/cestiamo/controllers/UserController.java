@@ -69,10 +69,9 @@ public class UserController {
         return  utenteRepository.findAll();
     }
 
-    @CrossOrigin("*")
+    //@CrossOrigin("*")
     @PostMapping("/login")
     public UtenteResponse login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws AuthenticationException {
-        
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

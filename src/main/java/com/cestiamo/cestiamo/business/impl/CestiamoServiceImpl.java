@@ -51,7 +51,7 @@ public class CestiamoServiceImpl implements CestiamoService {
     }
 
     @Override
-    public Partita findPartitaById(long id) throws BusinessException {
+    public Partita findPartitaById(Long id) throws BusinessException {
         return partitaRepository.findById(id).get();
     }
 
