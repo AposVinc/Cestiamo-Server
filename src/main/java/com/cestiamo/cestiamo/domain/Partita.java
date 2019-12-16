@@ -27,14 +27,22 @@ public class Partita {
     private TipoPartita tipologia;
 
     @OneToMany(mappedBy = "partita")
-    private Set<Bacheca> bachecas = new HashSet<Bacheca>();
+    private Set<Bacheca> bachecas = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name="PARTITA_UTENTI",
+            joinColumns={@JoinColumn(name="ID_PARTITA")},
+            inverseJoinColumns={@JoinColumn(name="ID_UTENTE")})
+    private Set<Utente> partecipanti = new HashSet<>();
+
 
     public Partita (){}
 
-    public Partita (Campo campo, Date data, TipoPartita tipologia){
+    public Partita (Campo campo, Date data, TipoPartita tipologia, Set<Utente> partecipanti){
         this.campo = campo;
         this.data = data;
         this.tipologia = tipologia;
+        this.partecipanti = partecipanti;
     }
 
     public Long getId() {
@@ -69,5 +77,15 @@ public class Partita {
         this.tipologia = tipologia;
     }
 
+    public Set<Utente> getPartecipanti() {
+        return partecipanti;
+    }
 
+    public void setPartecipanti(Set<Utente> utentiPartecipanti) {
+        this.partecipanti = utentiPartecipanti;
+    }
+
+    public void addPartecipante(Utente partecipante) {
+        this.partecipanti.add(partecipante);
+    }
 }

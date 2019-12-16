@@ -3,6 +3,7 @@ package com.cestiamo.cestiamo.controllers;
 import com.cestiamo.cestiamo.business.CestiamoService;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
 import com.cestiamo.cestiamo.domain.Partita;
+import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,9 @@ public class PartitaController
     }
 
     @GetMapping("/partita/{id}")
-    public Partita findById(@PathVariable Long id){ return partitaRepository.findPartitaById(id); }
+    public Partita findById(@PathVariable Long id){
+        return partitaRepository.findPartitaById(id);
+    }
+
 
 }

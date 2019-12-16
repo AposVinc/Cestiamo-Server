@@ -9,10 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 public class CestiamoApplication {
@@ -35,13 +32,51 @@ public class CestiamoApplication {
                 mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
 				mrossi.setVoto_m(4);
 				mrossi.setImg(new byte[0]);
-				System.out.println("CREATO Mario Rossi");
 				utenteRepository.save(mrossi);
 				System.out.println("SALVATO Mario Rossi");
+
+				Utente gverdi = new Utente();
+                gverdi.setNome("Giuseppe");
+                gverdi.setCognome("Verdi");
+                gverdi.setEmail("giuseppe.verdi@mail.it");
+                gverdi.setPassword(passwordEncoder.encode("123456789"));
+                gverdi.setCitta("Milano");
+                gverdi.setD_nascita(new GregorianCalendar(1995, Calendar.FEBRUARY,11).getTime());// day of month salva 24 in DB
+                gverdi.setN_partita(1); //si eve calcolare le occorrenze tra utente e partite
+                gverdi.setVoto_m(5);
+                gverdi.setImg(new byte[0]);
+				utenteRepository.save(gverdi);
+				System.out.println("SALVATO Giuseppe Verdi");
+
+				Utente aBianchi = new Utente();
+				aBianchi.setNome("Antonio");
+				aBianchi.setCognome("Bianchi");
+				aBianchi.setEmail("antonio.bianchi@mail.it");
+				aBianchi.setPassword(passwordEncoder.encode("123456789"));
+				aBianchi.setCitta("Roma");
+                aBianchi.setD_nascita(new GregorianCalendar(1980, Calendar.JULY,5).getTime());// day of month salva 24 in DB
+                aBianchi.setN_partita(6); //si eve calcolare le occorrenze tra utente e partite
+				aBianchi.setVoto_m(3);
+				aBianchi.setImg(new byte[0]);
+				utenteRepository.save(aBianchi);
+				System.out.println("SALVATO Antonio Bianchi");
+
+				Utente gMazzini = new Utente();
+                gMazzini.setNome("Giuseppe");
+                gMazzini.setCognome("Mazzini");
+                gMazzini.setEmail("giuseppe.mazzini@mail.it");
+                gMazzini.setPassword(passwordEncoder.encode("123456789"));
+                gMazzini.setCitta("Milano");
+                gMazzini.setD_nascita(new GregorianCalendar(1969, Calendar.DECEMBER,30).getTime());// day of month salva 24 in DB
+                gMazzini.setN_partita(0); //si eve calcolare le occorrenze tra utente e partite
+                gMazzini.setVoto_m(0);
+                gMazzini.setImg(new byte[0]);
+				utenteRepository.save(gMazzini);
+				System.out.println("SALVATO Giuseppe Mazzini");
 			} catch (Exception ex) {
 				System.out.println("ERROR");
 			}
-			System.out.println("Utenti salvati"+'\n');
+			System.out.println('\n' + "Utenti salvati"+'\n');
 
             try {
                 TipoPartita unovsuno = new TipoPartita();
@@ -64,8 +99,6 @@ public class CestiamoApplication {
                 cinquevscinque.setNome(EnumTipoP.CINQUEvsCINQUE.label);
                 cinquevscinque.setN_giocatori(10);
 
-                System.out.println("CREATI tipi partita");
-
                 tipoPartitaRepository.save(unovsuno);
                 tipoPartitaRepository.save(duevsdue);
                 tipoPartitaRepository.save(trevstre);
@@ -76,7 +109,6 @@ public class CestiamoApplication {
             } catch (Exception ex) {
                 System.out.println("ERROR");
             }
-            System.out.println("Tipi Partita salvati"+'\n');
 
 
             try {
@@ -95,19 +127,16 @@ public class CestiamoApplication {
                 c3.setVia("Via Della Croce Rossa, 75");
                 c3.setTelefono("328 4141250");
 
-                System.out.println("CREATI campi ");
-
                 campoRepository.save(c1);
                 campoRepository.save(c2);
                 campoRepository.save(c3);
 
-                System.out.println("SALVATI ");
+                System.out.println("Campi SALVATI \n");
             } catch (Exception ex) {
                 System.out.println("ERROR");
             }
-            System.out.println("salvati"+'\n');
 
-
+            List<Utente> u = utenteRepository.findAll();
             List<Campo> c = campoRepository.findAll();
             List<TipoPartita> t = tipoPartitaRepository.findAll();
             try {
@@ -115,28 +144,35 @@ public class CestiamoApplication {
                 p1.setCampo(c.get(0));
                 p1.setData(new GregorianCalendar(2019, Calendar.NOVEMBER,25,22,15).getTime());
                 p1.setTipologia(t.get(0));
+                p1.addPartecipante(u.get(0));
+                p1.addPartecipante(u.get(3));
 
                 Partita p2 = new Partita();
                 p2.setCampo(c.get(1));
                 p2.setData(new GregorianCalendar(2019, Calendar.OCTOBER,14,19,12).getTime());
                 p2.setTipologia(t.get(1));
+                p2.addPartecipante(u.get(0));
+                p2.addPartecipante(u.get(1));
+                p2.addPartecipante(u.get(2));
+                p2.addPartecipante(u.get(3));
 
                 Partita p3 = new Partita();
                 p3.setCampo(c.get(1));
                 p3.setData(new GregorianCalendar(2020, Calendar.MARCH,30,19,12).getTime());
-                p3.setTipologia(t.get(4));
-
-                System.out.println("CREATI ");
+                p3.setTipologia(t.get(1));;
+                p3.addPartecipante(u.get(0));
+                p3.addPartecipante(u.get(1));
+                p3.addPartecipante(u.get(2));
+                p3.addPartecipante(u.get(3));
 
                 partitaRepository.save(p1);
                 partitaRepository.save(p2);
                 partitaRepository.save(p3);
 
-                System.out.println("SALVATI ");
             } catch (Exception ex) {
                 System.out.println("ERROR");
             }
-            System.out.println("salvati"+'\n');
+            System.out.println("Partite SALVATE"+'\n');
 
 
             /*for (int i =0; i < 10; i++) {
