@@ -2,6 +2,8 @@ package com.cestiamo.cestiamo.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "utente")
@@ -144,11 +146,4 @@ public class Utente {
 		return id.equals(utente.id);
 	}
 
-	/*
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, getFamiglia());
-	}
-
-	 */
 }

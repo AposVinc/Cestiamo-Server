@@ -36,6 +36,11 @@ public class CestiamoServiceImpl implements CestiamoService {
     }
 
     @Override
+    public Utente findUtenteById(Long id) throws BusinessException {
+        return utenteRepository.findById(id).get();
+    }
+
+    @Override
     public List<Partita> findAllPartite () throws BusinessException {
         return partitaRepository.findAll();
     }
@@ -51,7 +56,7 @@ public class CestiamoServiceImpl implements CestiamoService {
     }
 
     @Override
-    public Partita findPartitaById(long id) throws BusinessException {
+    public Partita findPartitaById(Long id) throws BusinessException {
         return partitaRepository.findById(id).get();
     }
 
@@ -59,5 +64,6 @@ public class CestiamoServiceImpl implements CestiamoService {
     public void createPartita(Partita p) throws BusinessException {
         partitaRepository.save(p);
     }
+
 
 }
