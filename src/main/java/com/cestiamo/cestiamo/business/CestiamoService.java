@@ -11,6 +11,8 @@ public interface CestiamoService {
 
     Utente findUtenteByEmail(String email) throws BusinessException;
 
+    Utente findUtenteById(Long id) throws BusinessException;
+
     List<Partita> findAllPartite() throws BusinessException;
 
     List<Campo> findAllCampi() throws BusinessException;

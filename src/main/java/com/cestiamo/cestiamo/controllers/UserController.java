@@ -3,6 +3,7 @@ package com.cestiamo.cestiamo.controllers;
 import com.cestiamo.cestiamo.business.BusinessException;
 import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
 //import com.cestiamo.cestiamo.Utility;
+import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.Utente;
 import com.cestiamo.cestiamo.domain.UtenteResponse;
 import com.cestiamo.cestiamo.spring.security.JWTTokenUtil;
@@ -43,7 +44,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
 /*
-    @CrossOrigin()
+    //@CrossOrigin()
     @RequestMapping("/creaUtente")
     public String creaUtente(@RequestBody Utente u){
         
@@ -63,10 +64,15 @@ public class UserController {
         return "Utente creato";
     }
 */
-    @CrossOrigin()
+    //@CrossOrigin()
     @RequestMapping("/getUtente")
     public List<Utente> getUtenti(){
         return  utenteRepository.findAll();
+    }
+
+    @GetMapping("/utente/{id}")
+    public Utente findById(@PathVariable Long id){
+        return utenteRepository.findUtenteById(id);
     }
 
     //@CrossOrigin("*")
@@ -80,8 +86,8 @@ public class UserController {
         return new UtenteResponse(((UserDetailsImpl) userDetails).getUtente());
     }
 
-    /*
-    @CrossOrigin("*")
+/*
+    //@CrossOrigin("*")
     @PostMapping("/updateImage")
     public UtenteResponse updateImage(@RequestBody byte[] image){
 
@@ -100,7 +106,7 @@ public class UserController {
         return u1;
     }
 
-    @CrossOrigin("*")
+    //@CrossOrigin("*")
     @PostMapping("/updateProfilo")
     public UtenteResponse updateProfilo(@RequestBody Utente utente) throws BusinessException {
         Utente u1=utenteRepository.findUtenteByEmail(utente.getEmail());
