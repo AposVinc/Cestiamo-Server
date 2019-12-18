@@ -55,5 +55,9 @@ public class CestiamoServiceImpl implements CestiamoService {
         return partitaRepository.findById(id).get();
     }
 
+    @Override
+    public void createPartita(Partita p) throws BusinessException {
+        partitaRepository.save(p);
+    }
 
 }

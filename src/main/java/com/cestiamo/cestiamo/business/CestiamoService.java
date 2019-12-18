@@ -4,6 +4,7 @@ import com.cestiamo.cestiamo.domain.Campo;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.TipoPartita;
 import com.cestiamo.cestiamo.domain.Utente;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
@@ -18,4 +19,6 @@ public interface CestiamoService {
     List<TipoPartita> findAllTypeMatch() throws BusinessException;
 
     Partita findPartitaById(long id) throws BusinessException;
+
+    void createPartita(Partita p) throws BusinessException;
 }

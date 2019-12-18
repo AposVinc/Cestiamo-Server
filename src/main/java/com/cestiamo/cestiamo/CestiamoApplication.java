@@ -139,13 +139,6 @@ public class CestiamoApplication {
             System.out.println("salvati"+'\n');
 
 
-            /*for (int i =0; i < 10; i++) {
-                Partita partita = new Partita();
-                partita.setCampo(c.get(i));
-                Date dataPartita = new Date(System.currentTimeMillis() - (i * 86400000));
-                partita.setData(dataPartita);
-                System.out.println("ciclo partita"+'\n');
-            }*/
 
 
 		};

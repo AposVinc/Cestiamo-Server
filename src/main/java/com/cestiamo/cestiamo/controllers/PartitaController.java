@@ -13,8 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class PartitaController
-{
+public class PartitaController {
     @Autowired
     PartitaRepository partitaRepository;
 
@@ -35,9 +34,13 @@ public class PartitaController
     }
 
     @CrossOrigin()
-    @GetMapping("/nuovaPartita")
-    public void createPartita(@RequestBody Partita p){
-        partitaRepository.save(p);
+    @GetMapping("nuovaPartita")
+    public void createPartita(@RequestBody Partita p) {
+        p.setCampo(p.getCampo());
+        p.setData(p.getData());
+        p.setTipologia(p.getTipologia());
+        cestiamoService.createPartita(p);
+        System.out.println("partita creata");
     }
 
     @GetMapping("/getPartita/{id}")
