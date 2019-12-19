@@ -26,7 +26,7 @@ public class PartitaController {
     }
 
     @CrossOrigin()
-    @GetMapping("nuovaPartita")
+    @GetMapping("/nuovaPartita")
     public void createPartita(@RequestBody Partita p) {
         p.setCampo(p.getCampo());
         p.setData(p.getData());
