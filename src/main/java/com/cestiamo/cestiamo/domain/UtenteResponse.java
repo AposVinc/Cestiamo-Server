@@ -1,6 +1,8 @@
 package com.cestiamo.cestiamo.domain;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 public class UtenteResponse {
 
@@ -11,8 +13,6 @@ public class UtenteResponse {
     private String password;
     private String citta;
     private Date d_nascita;
-    private int n_partita;
-    private int voto_m;
     private String img;
 
     public UtenteResponse() {
@@ -26,8 +26,6 @@ public class UtenteResponse {
         this.password=u.getPassword();
         this.citta=u.getCitta();
         this.d_nascita=u.getD_nascita();
-        this.n_partita=u.getN_partita();
-        this.voto_m=u.getVoto_m();
         this.img=new String(u.getImg());
     }
 
@@ -88,20 +86,6 @@ public class UtenteResponse {
         this.d_nascita = d_nascita;
     }
 
-    public int getN_partita() {
-        return n_partita;
-    }
-
-    public void setN_partita(int n_partita) {
-        this.n_partita = n_partita;
-    }
-
-    public int getVoto_m() {
-        return voto_m;
-    }
-
-    public void setVoto_m(int voto_m) {this.voto_m = voto_m;}
-
     public String getImg() {
         return img;
     }
@@ -114,15 +98,13 @@ public class UtenteResponse {
     @Override
     public String toString() {
         return "Utente{" +
-                "id_utente=" + id +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", città=" + citta +
                 ", data di nascita=" + d_nascita +
-                ", numero partite=" + n_partita +
-                ", voto=" + voto_m +
                 ", img='" + img + '\'' +
                 '}';
     }

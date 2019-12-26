@@ -1,12 +1,14 @@
 package com.cestiamo.cestiamo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "utente")
+@Table(name = "Utente")
 public class Utente {
 
 	@Id
@@ -20,7 +22,7 @@ public class Utente {
 	@Column(name = "COGNOME", nullable = false, length = 255)
 	private String cognome;
 
-	@Column(name = "EMAIL", nullable = false, length = 255)
+	@Column(name = "EMAIL", nullable = false, length = 255, unique = true)
 	private String email;
 
 	@Column(name = "PASSWORD", nullable = false, length = 255)
@@ -32,11 +34,24 @@ public class Utente {
 	@Column(name = "NASCITA",  length = 16)
 	private Date d_nascita;
 
-	@Column(name = "N_PARTITA", length = 255)
-	private int n_partita;
+	@JsonIgnore
+	@ManyToMany(mappedBy = "partecipanti")
+	private Set<Partita> partiteGiocate = new HashSet<>();
 
-	@Column(name = "VOTO_M",  length = 255)
-	private int voto_m;
+	// n° partite giocate
+
+	@OneToMany(mappedBy = "votante",
+				cascade = CascadeType.ALL,
+				orphanRemoval = true)
+	private Set<Votazione> votazioni_fatte = new HashSet<>();
+
+
+	@OneToMany(mappedBy = "votato",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private Set<Votazione> votazioni_ricevute = new HashSet<>();
+
+	// media voto
 
 	@Lob
 	@Column(name="IMG")
@@ -101,19 +116,11 @@ public class Utente {
 		this.d_nascita = d_nascita;
 	}
 
-	public int getN_partita() {
-		return n_partita;
-	}
+	public Set<Partita> getPartiteGiocate() { return partiteGiocate; }
 
-	public void setN_partita(int n_partita) {
-		this.n_partita = n_partita;
+	public void addPartitaGiocata(Partita partita){
+		this.partiteGiocate.add(partita);
 	}
-
-	public int getVoto_m() {
-		return voto_m;
-	}
-
-	public void setVoto_m(int voto_m) {this.voto_m = voto_m;}
 
 	public byte[] getImg() {
 		return img;
@@ -128,12 +135,13 @@ public class Utente {
 	@Override
 	public String toString() {
 		return "Utente{" +
-				"id_utente=" + id +
+				"id=" + id +
 				", nome='" + nome + '\'' +
 				", cognome='" + cognome + '\'' +
-				", d_nascita=" + d_nascita +
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
+				", città=" + citta +
+				", data di nascita=" + d_nascita +
 				", img='" + img + '\'' +
 				'}';
 	}
