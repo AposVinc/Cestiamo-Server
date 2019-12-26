@@ -36,7 +36,7 @@ public class Utente {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti")
-	private Set<Partita> partecipazioni = new HashSet<>();
+	private Set<Partita> partiteGiocate = new HashSet<>();
 
 	// n° partite giocate
 
@@ -116,14 +116,10 @@ public class Utente {
 		this.d_nascita = d_nascita;
 	}
 
-	public Set<Partita> getPartite_giocate() { return partecipazioni; }
+	public Set<Partita> getPartiteGiocate() { return partiteGiocate; }
 
-	public void setPartite_giocate(Set<Partita> partite_giocate) {
-		this.partecipazioni = partite_giocate;
-	}
-
-	public void addPartita_giocata(Partita partita){
-		this.partecipazioni.add(partita);
+	public void addPartitaGiocata(Partita partita){
+		this.partiteGiocate.add(partita);
 	}
 
 	public byte[] getImg() {
@@ -139,7 +135,7 @@ public class Utente {
 	@Override
 	public String toString() {
 		return "Utente{" +
-				"id_utente=" + id +
+				"id=" + id +
 				", nome='" + nome + '\'' +
 				", cognome='" + cognome + '\'' +
 				", email='" + email + '\'' +

@@ -13,7 +13,6 @@ public class UtenteResponse {
     private String password;
     private String citta;
     private Date d_nascita;
-    private Set<Partita> partecipazioni;
     private String img;
 
     public UtenteResponse() {
@@ -27,7 +26,6 @@ public class UtenteResponse {
         this.password=u.getPassword();
         this.citta=u.getCitta();
         this.d_nascita=u.getD_nascita();
-        this.partecipazioni=u.getPartite_giocate();
         this.img=new String(u.getImg());
     }
 
@@ -88,10 +86,6 @@ public class UtenteResponse {
         this.d_nascita = d_nascita;
     }
 
-    public Set<Partita> getPartecipazioni() {
-        return partecipazioni;
-    }
-
     public String getImg() {
         return img;
     }
@@ -104,7 +98,7 @@ public class UtenteResponse {
     @Override
     public String toString() {
         return "Utente{" +
-                "id_utente=" + id +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", email='" + email + '\'' +
