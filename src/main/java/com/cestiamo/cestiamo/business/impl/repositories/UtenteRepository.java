@@ -8,8 +8,6 @@ public interface UtenteRepository extends JpaRepository<Utente, Long> {
 
     Utente findUtenteByEmail(String email);
 
-    Utente findUtenteById(Long id);
-
 
 
 }

@@ -1,8 +1,8 @@
 package com.cestiamo.cestiamo.domain;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Time;
+import java.util.Date;
 
 @Entity
 @Table(name = "Bacheca")
@@ -17,10 +17,11 @@ public class Bacheca {
     @JoinColumn(name = "ID_UTENTE", nullable = false)
     private Utente mittente;
 */
+/*
     @ManyToOne
     @JoinColumn(name = "ID_PARTITA", nullable = false)
     private Partita partita;
-
+*/
     @Column(name = "DATA")
     private Date data;
 

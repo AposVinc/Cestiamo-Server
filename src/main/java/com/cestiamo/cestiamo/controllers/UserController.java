@@ -70,9 +70,9 @@ public class UserController {
         return  utenteRepository.findAll();
     }
 
-    @GetMapping("/utente/{id}")
-    public Utente findById(@PathVariable Long id){
-        return utenteRepository.findUtenteById(id);
+    @GetMapping("/utente/{email}")
+    public Utente findByEmail(@PathVariable String email){
+        return utenteRepository.findUtenteByEmail(email);
     }
 
     //@CrossOrigin("*")
