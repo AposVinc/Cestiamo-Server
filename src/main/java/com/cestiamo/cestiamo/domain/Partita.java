@@ -1,9 +1,12 @@
 package com.cestiamo.cestiamo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,12 +28,12 @@ public class Partita {
     @ManyToOne
     @JoinColumn(name = "ID_TIPO_PARTITA", nullable = false)
     private TipoPartita tipologia;
-
-    @OneToMany(mappedBy = "partita")
-    private Set<Bacheca> bachecas = new HashSet<>();
-
+/*
+    @OneToMany(mappedBy = "Partita")
+    private Set<Bacheca> bacheca = new HashSet<>();
+*/
     @ManyToMany
-    @JoinTable(name="PARTITA_UTENTI",
+    @JoinTable(name="UTENTE_PARTITA",
             joinColumns={@JoinColumn(name="ID_PARTITA")},
             inverseJoinColumns={@JoinColumn(name="ID_UTENTE")})
     private Set<Utente> partecipanti = new HashSet<>();
@@ -87,5 +90,18 @@ public class Partita {
 
     public void addPartecipante(Utente partecipante) {
         this.partecipanti.add(partecipante);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Partita partita = (Partita) o;
+        return id.equals(partita.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

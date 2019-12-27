@@ -29,8 +29,8 @@ public class CestiamoApplication {
 				mrossi.setPassword(passwordEncoder.encode("123456789"));
 				mrossi.setCitta("Roma");
                 mrossi.setD_nascita(new GregorianCalendar(1990, Calendar.MARCH,25).getTime());// day of month salva 24 in DB
-                mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
-				mrossi.setVoto_m(4);
+                //mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
+				//mrossi.setVoto_m(4);
 				mrossi.setImg(new byte[0]);
 				utenteRepository.save(mrossi);
 				System.out.println("SALVATO Mario Rossi");
@@ -42,8 +42,8 @@ public class CestiamoApplication {
                 gverdi.setPassword(passwordEncoder.encode("123456789"));
                 gverdi.setCitta("Milano");
                 gverdi.setD_nascita(new GregorianCalendar(1995, Calendar.FEBRUARY,11).getTime());// day of month salva 24 in DB
-                gverdi.setN_partita(1); //si eve calcolare le occorrenze tra utente e partite
-                gverdi.setVoto_m(5);
+                //gverdi.setN_partita(1); //si eve calcolare le occorrenze tra utente e partite
+                //gverdi.setVoto_m(5);
                 gverdi.setImg(new byte[0]);
 				utenteRepository.save(gverdi);
 				System.out.println("SALVATO Giuseppe Verdi");
@@ -55,8 +55,8 @@ public class CestiamoApplication {
 				aBianchi.setPassword(passwordEncoder.encode("123456789"));
 				aBianchi.setCitta("Roma");
                 aBianchi.setD_nascita(new GregorianCalendar(1980, Calendar.JULY,5).getTime());// day of month salva 24 in DB
-                aBianchi.setN_partita(6); //si eve calcolare le occorrenze tra utente e partite
-				aBianchi.setVoto_m(3);
+                //aBianchi.setN_partita(6); //si eve calcolare le occorrenze tra utente e partite
+				//aBianchi.setVoto_m(3);
 				aBianchi.setImg(new byte[0]);
 				utenteRepository.save(aBianchi);
 				System.out.println("SALVATO Antonio Bianchi");
@@ -68,15 +68,18 @@ public class CestiamoApplication {
                 gMazzini.setPassword(passwordEncoder.encode("123456789"));
                 gMazzini.setCitta("Milano");
                 gMazzini.setD_nascita(new GregorianCalendar(1969, Calendar.DECEMBER,30).getTime());// day of month salva 24 in DB
-                gMazzini.setN_partita(0); //si eve calcolare le occorrenze tra utente e partite
-                gMazzini.setVoto_m(0);
+                //gMazzini.setN_partita(0); //si eve calcolare le occorrenze tra utente e partite
+                //gMazzini.setVoto_m(0);
                 gMazzini.setImg(new byte[0]);
 				utenteRepository.save(gMazzini);
 				System.out.println("SALVATO Giuseppe Mazzini");
+
+                System.out.println('\n' + "Utenti salvati"+'\n');
 			} catch (Exception ex) {
 				System.out.println("ERROR");
 			}
-			System.out.println('\n' + "Utenti salvati"+'\n');
+
+            List<Utente> u = utenteRepository.findAll();
 
             try {
                 TipoPartita unovsuno = new TipoPartita();
@@ -105,11 +108,12 @@ public class CestiamoApplication {
                 tipoPartitaRepository.save(quattrovsquattro);
                 tipoPartitaRepository.save(cinquevscinque);
 
-                System.out.println("SALVATI tipi partita");
+                System.out.println('\n' + "SALVATI tipi partita" +'\n' );
             } catch (Exception ex) {
                 System.out.println("ERROR");
             }
 
+            List<TipoPartita> t = tipoPartitaRepository.findAll();
 
             try {
                 Campo c1 = new Campo();
@@ -131,20 +135,19 @@ public class CestiamoApplication {
                 campoRepository.save(c2);
                 campoRepository.save(c3);
 
-                System.out.println("Campi SALVATI \n");
+                System.out.println('\n' + "Campi SALVATI" +'\n' );
             } catch (Exception ex) {
                 System.out.println("ERROR");
             }
 
-            List<Utente> u = utenteRepository.findAll();
             List<Campo> c = campoRepository.findAll();
-            List<TipoPartita> t = tipoPartitaRepository.findAll();
+
             try {
                 Partita p1 = new Partita();
                 p1.setCampo(c.get(0));
                 p1.setData(new GregorianCalendar(2019, Calendar.NOVEMBER,25,22,15).getTime());
                 p1.setTipologia(t.get(0));
-                p1.addPartecipante(u.get(0));
+                p1.addPartecipante(u.get(1));
                 p1.addPartecipante(u.get(3));
 
                 Partita p2 = new Partita();
@@ -169,14 +172,24 @@ public class CestiamoApplication {
                 partitaRepository.save(p2);
                 partitaRepository.save(p3);
 
+                System.out.println('\n' + "Partite SALVATE" +'\n');
+
             } catch (Exception ex) {
                 System.out.println("ERROR");
             }
-            System.out.println("Partite SALVATE"+'\n');
 
+            List<Partita> p = partitaRepository.findAll();
+/*
+            System.out.println('\n' + "**********" +'\n');
+            Set<Utente> utenteSet = p.get(0).getPartecipanti();
+            for (Utente utente: utenteSet){
+                System.out.println(utente.toString());
+            }
+            //for (Utente utente : p.get(0).getPartecipanti()) System.out.println(utente.toString());
 
-
-
+            //System.out.println(u.get(0).getPartite_giocate());
+            System.out.println('\n' + "**********" +'\n');
+*/
 		};
 	}
 
