@@ -34,6 +34,9 @@ public class Utente {
 	@Column(name = "NASCITA",  length = 16)
 	private Date d_nascita;
 
+	@Column(name = "VIA", length = 225)
+	private String via;
+
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti")
 	private Set<Partita> partiteGiocate = new HashSet<>();
@@ -60,9 +63,7 @@ public class Utente {
 
 	public Long getId_utente() { return id;	}
 
-	public Long getId() {
-		return id;
-	}
+	public Long getId() { return id; }
 
 	public void setId(Long id) {
 		this.id = id;
@@ -129,6 +130,10 @@ public class Utente {
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
+
+	public String getVia() { return via; }
+
+	public void setVia(String via) { this.via = via; }
 
 
 

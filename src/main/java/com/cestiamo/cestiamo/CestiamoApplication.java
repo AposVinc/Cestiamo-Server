@@ -28,6 +28,7 @@ public class CestiamoApplication {
 				mrossi.setEmail("mario.rossi@mail.it");
 				mrossi.setPassword(passwordEncoder.encode("123456789"));
 				mrossi.setCitta("Roma");
+				mrossi.setVia("Piazza Bologna, 17");
                 mrossi.setD_nascita(new GregorianCalendar(1990, Calendar.MARCH,25).getTime());// day of month salva 24 in DB
                 //mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
 				//mrossi.setVoto_m(4);
@@ -41,6 +42,7 @@ public class CestiamoApplication {
                 gverdi.setEmail("giuseppe.verdi@mail.it");
                 gverdi.setPassword(passwordEncoder.encode("123456789"));
                 gverdi.setCitta("Milano");
+                gverdi.setVia("Via dei Piccolomini, 80");
                 gverdi.setD_nascita(new GregorianCalendar(1995, Calendar.FEBRUARY,11).getTime());// day of month salva 24 in DB
                 //gverdi.setN_partita(1); //si eve calcolare le occorrenze tra utente e partite
                 //gverdi.setVoto_m(5);
@@ -54,6 +56,7 @@ public class CestiamoApplication {
 				aBianchi.setEmail("antonio.bianchi@mail.it");
 				aBianchi.setPassword(passwordEncoder.encode("123456789"));
 				aBianchi.setCitta("Roma");
+				aBianchi.setVia("Lungotevere Gianicolense, 257");
                 aBianchi.setD_nascita(new GregorianCalendar(1980, Calendar.JULY,5).getTime());// day of month salva 24 in DB
                 //aBianchi.setN_partita(6); //si eve calcolare le occorrenze tra utente e partite
 				//aBianchi.setVoto_m(3);
@@ -67,6 +70,7 @@ public class CestiamoApplication {
                 gMazzini.setEmail("giuseppe.mazzini@mail.it");
                 gMazzini.setPassword(passwordEncoder.encode("123456789"));
                 gMazzini.setCitta("Milano");
+                gMazzini.setVia("Piazza Duca d'Aosta, 94");
                 gMazzini.setD_nascita(new GregorianCalendar(1969, Calendar.DECEMBER,30).getTime());// day of month salva 24 in DB
                 //gMazzini.setN_partita(0); //si eve calcolare le occorrenze tra utente e partite
                 //gMazzini.setVoto_m(0);
