@@ -2,6 +2,7 @@ package com.cestiamo.cestiamo;
 
 import com.cestiamo.cestiamo.spring.security.JWTAuthenticationEntryPoint;
 import com.cestiamo.cestiamo.spring.security.JWTAuthenticationTokenFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     private JWTAuthenticationEntryPoint unauthorizedHandler;
-/*
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -37,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
     }
-*/
+
 
     @Bean
     @Override
@@ -72,16 +73,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                
+                // non abbiamo bisogno di una sessione
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors()
                 .and().authorizeRequests()
-               
-                .antMatchers("/", "/**","/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/api/login**", "/api/creaUtente**").permitAll()
-                .antMatchers("/api/creaVeicolo**","/api/getVeicoli**" ).authenticated();
 
+                //Specificare le url che sono soggette ad autenticazione ed autorizzazione
+                .antMatchers("/", "/**","/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/api/login**", "/api/creaUtente**").permitAll();
+                //.antMatchers("/api/creaVeicolo**","/api/getVeicoli**" ).authenticated();
 
-
-      
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.headers().cacheControl();
