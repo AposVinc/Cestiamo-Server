@@ -13,18 +13,18 @@ public class Partita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_PARTITA", /*nullable = false*/)
+    @Column(name = "ID_PARTITA" /* , nullable = false*/)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_CAMPO", /*nullable = false*/)
+    @JoinColumn(name = "ID_CAMPO" /* , nullable = false*/)
     private Campo campo;
 
     @Column(name = "DATA")
     private Date data;
 
     @ManyToOne
-    @JoinColumn(name = "ID_TIPO_PARTITA", /*nullable = false*/)
+    @JoinColumn(name = "ID_TIPO_PARTITA" /*, nullable = false*/)
     private TipoPartita tipologia;
 /*
     @OneToMany(mappedBy = "Partita")
