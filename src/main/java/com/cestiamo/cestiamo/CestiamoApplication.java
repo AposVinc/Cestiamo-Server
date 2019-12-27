@@ -18,7 +18,8 @@ public class CestiamoApplication {
 	private PasswordEncoder passwordEncoder;
 
 	@Bean
-	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository, CampoRepository campoRepository, PartitaRepository partitaRepository) {
+	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository,
+                                      CampoRepository campoRepository, PartitaRepository partitaRepository, VotazioneRepository votazioneRepository) {
 
 		return (args) -> {
 			try {
@@ -29,7 +30,7 @@ public class CestiamoApplication {
 				mrossi.setPassword(passwordEncoder.encode("123456789"));
 				mrossi.setCitta("Roma");
 				mrossi.setVia("Piazza Bologna, 17");
-                mrossi.setD_nascita(new GregorianCalendar(1990, Calendar.MARCH,25).getTime());// day of month salva 24 in DB
+                mrossi.setDataNascita(new GregorianCalendar(1990, Calendar.MARCH,25).getTime());// day of month salva 24 in DB
                 //mrossi.setN_partita(11); //si eve calcolare le occorrenze tra utente e partite
 				//mrossi.setVoto_m(4);
 				mrossi.setImg(new byte[0]);
@@ -43,7 +44,7 @@ public class CestiamoApplication {
                 gverdi.setPassword(passwordEncoder.encode("123456789"));
                 gverdi.setCitta("Milano");
                 gverdi.setVia("Via dei Piccolomini, 80");
-                gverdi.setD_nascita(new GregorianCalendar(1995, Calendar.FEBRUARY,11).getTime());// day of month salva 24 in DB
+                gverdi.setDataNascita(new GregorianCalendar(1995, Calendar.FEBRUARY,11).getTime());// day of month salva 24 in DB
                 //gverdi.setN_partita(1); //si eve calcolare le occorrenze tra utente e partite
                 //gverdi.setVoto_m(5);
                 gverdi.setImg(new byte[0]);
@@ -57,7 +58,7 @@ public class CestiamoApplication {
 				aBianchi.setPassword(passwordEncoder.encode("123456789"));
 				aBianchi.setCitta("Roma");
 				aBianchi.setVia("Lungotevere Gianicolense, 257");
-                aBianchi.setD_nascita(new GregorianCalendar(1980, Calendar.JULY,5).getTime());// day of month salva 24 in DB
+                aBianchi.setDataNascita(new GregorianCalendar(1980, Calendar.JULY,5).getTime());// day of month salva 24 in DB
                 //aBianchi.setN_partita(6); //si eve calcolare le occorrenze tra utente e partite
 				//aBianchi.setVoto_m(3);
 				aBianchi.setImg(new byte[0]);
@@ -71,7 +72,7 @@ public class CestiamoApplication {
                 gMazzini.setPassword(passwordEncoder.encode("123456789"));
                 gMazzini.setCitta("Milano");
                 gMazzini.setVia("Piazza Duca d'Aosta, 94");
-                gMazzini.setD_nascita(new GregorianCalendar(1969, Calendar.DECEMBER,30).getTime());// day of month salva 24 in DB
+                gMazzini.setDataNascita(new GregorianCalendar(1969, Calendar.DECEMBER,30).getTime());// day of month salva 24 in DB
                 //gMazzini.setN_partita(0); //si eve calcolare le occorrenze tra utente e partite
                 //gMazzini.setVoto_m(0);
                 gMazzini.setImg(new byte[0]);
@@ -84,6 +85,25 @@ public class CestiamoApplication {
 			}
 
             List<Utente> u = utenteRepository.findAll();
+
+			try {
+			    List<Votazione> votazioneList = new LinkedList<>() ;
+			    votazioneList.add(new Votazione(u.get(0),u.get(1),5));
+			    votazioneList.add(new Votazione(u.get(0),u.get(2),2));
+			    votazioneList.add(new Votazione(u.get(0),u.get(3),3));
+			    votazioneList.add(new Votazione(u.get(1),u.get(0),4));
+			    votazioneList.add(new Votazione(u.get(1),u.get(2),1));
+			    votazioneList.add(new Votazione(u.get(1),u.get(3),2));
+			    votazioneList.add(new Votazione(u.get(2),u.get(0),5));
+			    votazioneList.add(new Votazione(u.get(2),u.get(1),1));
+			    votazioneList.add(new Votazione(u.get(3),u.get(2),3));
+
+                votazioneRepository.saveAll(votazioneList);
+
+                System.out.println('\n' + "Voti salvati"+'\n');
+            } catch (Exception ex) {
+                System.out.println("ERROR");
+            }
 
             try {
                 TipoPartita unovsuno = new TipoPartita();
@@ -194,6 +214,10 @@ public class CestiamoApplication {
             //System.out.println(u.get(0).getPartite_giocate());
             System.out.println('\n' + "**********" +'\n');
 */
+
+
+            //System.out.println(u.get(0).getNumPartite());
+            //System.out.println(u.get(0).getMediaVoto());
 		};
 	}
 

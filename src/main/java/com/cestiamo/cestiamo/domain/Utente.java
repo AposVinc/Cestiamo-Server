@@ -1,14 +1,14 @@
 package com.cestiamo.cestiamo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "Utente")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Utente {
 
 	@Id
@@ -32,7 +32,7 @@ public class Utente {
 	private String citta;
 
 	@Column(name = "NASCITA",  length = 16)
-	private Date d_nascita;
+	private Date dataNascita;
 
 	@Column(name = "VIA", length = 225)
 	private String via;
@@ -41,20 +41,17 @@ public class Utente {
 	@ManyToMany(mappedBy = "partecipanti")
 	private Set<Partita> partiteGiocate = new HashSet<>();
 
-	// n° partite giocate
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "votante",
 				cascade = CascadeType.ALL,
 				orphanRemoval = true)
-	private Set<Votazione> votazioni_fatte = new HashSet<>();
+	private Set<Votazione> votazioniFatte = new HashSet<>();
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "votato",
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
-	private Set<Votazione> votazioni_ricevute = new HashSet<>();
-
-	// media voto
+	private Set<Votazione> votazioniRicevute = new HashSet<>();
 
 	@Lob
 	@Column(name="IMG")
@@ -109,18 +106,58 @@ public class Utente {
 		this.citta = citta;
 	}
 
-	public Date getD_nascita() {
-		return d_nascita;
+	public Date getDataNascita() {
+		return dataNascita;
 	}
 
-	public void setD_nascita(Date d_nascita) {
-		this.d_nascita = d_nascita;
+	public void setDataNascita(Date d_nascita) {
+		this.dataNascita = d_nascita;
 	}
 
 	public Set<Partita> getPartiteGiocate() { return partiteGiocate; }
 
+	public void setPartiteGiocate(Set<Partita> partite_giocate) {
+		this.partiteGiocate = partite_giocate;
+	}
+
 	public void addPartitaGiocata(Partita partita){
 		this.partiteGiocate.add(partita);
+	}
+	
+	public int getNumPartite() {
+		return partiteGiocate.size();
+	}
+
+	public Set<Votazione> getVotazioniFatte() {
+		return votazioniFatte;
+	}
+
+	public void setVotazioniFatte(Set<Votazione> votazioni_fatte) {
+		this.votazioniFatte = votazioni_fatte;
+	}
+
+	public String getVia() { return via; }
+
+	public void setVia(String via) { this.via = via; }
+
+	public void addVotazioneUtente(Utente votato, int voto) {
+		this.votazioniFatte.add(new Votazione(this, votato, voto));
+	}
+
+	public Set<Votazione> getVotazioniRicevute() {
+		return votazioniRicevute;
+	}
+
+	public void setVotazioniRicevute(Set<Votazione> votazioni_ricevute) {
+		this.votazioniRicevute = votazioni_ricevute;
+	}
+	
+	public int getMediaVoto(){
+		int tot = 0;
+		for (Votazione v: votazioniRicevute) {
+			tot += v.getVoto();
+		}
+		return tot/votazioniRicevute.size();
 	}
 
 	public byte[] getImg() {
@@ -129,26 +166,6 @@ public class Utente {
 
 	public void setImg(byte[] img) {
 		this.img = img;
-	}
-
-	public String getVia() { return via; }
-
-	public void setVia(String via) { this.via = via; }
-
-
-
-	@Override
-	public String toString() {
-		return "Utente{" +
-				"id=" + id +
-				", nome='" + nome + '\'' +
-				", cognome='" + cognome + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				", città=" + citta +
-				", data di nascita=" + d_nascita +
-				", img='" + img + '\'' +
-				'}';
 	}
 
 	@Override

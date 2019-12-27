@@ -1,7 +1,5 @@
 package com.cestiamo.cestiamo.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 import java.util.Date;
@@ -32,6 +30,7 @@ public class Partita {
     @OneToMany(mappedBy = "Partita")
     private Set<Bacheca> bacheca = new HashSet<>();
 */
+
     @ManyToMany
     @JoinTable(name="UTENTE_PARTITA",
             joinColumns={@JoinColumn(name="ID_PARTITA")},
