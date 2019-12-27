@@ -18,7 +18,7 @@ public interface CestiamoService {
 
     List<TipoPartita> findAllTypeMatch() throws BusinessException;
     
-    void createPartita(Partita p) throws BusinessException;
+    void createPartita(Partita partita) throws BusinessException;
 
     Partita findPartitaById(Long id) throws BusinessException;
 
