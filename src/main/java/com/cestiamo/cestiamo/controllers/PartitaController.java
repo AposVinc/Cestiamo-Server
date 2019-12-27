@@ -26,13 +26,16 @@ public class PartitaController {
     }
 
     @CrossOrigin()
-    @GetMapping("/nuovaPartita")
-    public void createPartita(@RequestBody Partita p) {
-        p.setCampo(p.getCampo());
-        p.setData(p.getData());
-        p.setTipologia(p.getTipologia());
-        cestiamoService.createPartita(p);
+    @PostMapping("/nuovaPartita")
+    public Partita createPartita(Partita partita) {
+        System.out.println("METODO CREA PARTITA");
+        Partita p= new Partita();
+        p.setCampo(partita.getCampo());
+        p.setData(partita.getData());
+        p.setTipologia(partita.getTipologia());
+        cestiamoService.createPartita(partita);
         System.out.println("partita creata");
+        return p;
     }
 
     @GetMapping("/partita/{id}")
