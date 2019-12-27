@@ -29,6 +29,9 @@ public class CestiamoServiceImpl implements CestiamoService {
     @Autowired
     private TipoPartitaRepository tipoPartitaRepository;
 
+    @Autowired
+    private VotazioneRepository votazioneRepository;
+
 
     @Override
     public Utente findUtenteByEmail(String email)throws BusinessException{

@@ -18,7 +18,8 @@ public class CestiamoApplication {
 	private PasswordEncoder passwordEncoder;
 
 	@Bean
-	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository, CampoRepository campoRepository, PartitaRepository partitaRepository) {
+	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository,
+                                      CampoRepository campoRepository, PartitaRepository partitaRepository, VotazioneRepository votazioneRepository) {
 
 		return (args) -> {
 			try {
@@ -80,6 +81,25 @@ public class CestiamoApplication {
 			}
 
             List<Utente> u = utenteRepository.findAll();
+
+			try {
+			    List<Votazione> votazioneList = new LinkedList<>() ;
+			    votazioneList.add(new Votazione(u.get(0),u.get(1),5));
+			    votazioneList.add(new Votazione(u.get(0),u.get(2),2));
+			    votazioneList.add(new Votazione(u.get(0),u.get(3),3));
+			    votazioneList.add(new Votazione(u.get(1),u.get(0),4));
+			    votazioneList.add(new Votazione(u.get(1),u.get(2),1));
+			    votazioneList.add(new Votazione(u.get(1),u.get(3),2));
+			    votazioneList.add(new Votazione(u.get(2),u.get(0),5));
+			    votazioneList.add(new Votazione(u.get(2),u.get(1),1));
+			    votazioneList.add(new Votazione(u.get(3),u.get(2),3));
+
+                votazioneRepository.saveAll(votazioneList);
+
+                System.out.println('\n' + "Voti salvati"+'\n');
+            } catch (Exception ex) {
+                System.out.println("ERROR");
+            }
 
             try {
                 TipoPartita unovsuno = new TipoPartita();
@@ -190,6 +210,10 @@ public class CestiamoApplication {
             //System.out.println(u.get(0).getPartite_giocate());
             System.out.println('\n' + "**********" +'\n');
 */
+
+
+            //System.out.println(u.get(0).getNumPartite());
+            //System.out.println(u.get(0).getMediaVoto());
 		};
 	}
 

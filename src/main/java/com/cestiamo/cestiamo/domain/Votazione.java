@@ -40,9 +40,6 @@ public class Votazione {
         }
     }
 
-
-
-
     @EmbeddedId
     private VotazioneId id;
 
@@ -59,10 +56,34 @@ public class Votazione {
 
     private Votazione() {}
 
-    private Votazione (Utente votante, Utente votato, int voto) {
+    public Votazione(Utente votante, Utente votato, int voto) {
         this.votante = votante;
         this.votato = votato;
         this.id = new VotazioneId(votante.getId(), votato.getId());
+        this.voto = voto;
+    }
+
+    public Utente getVotante() {
+        return votante;
+    }
+
+    public void setVotante(Utente votante) {
+        this.votante = votante;
+    }
+
+    public Utente getVotato() {
+        return votato;
+    }
+
+    public void setVotato(Utente votato) {
+        this.votato = votato;
+    }
+
+    public int getVoto() {
+        return voto;
+    }
+
+    public void setVoto(int voto) {
         this.voto = voto;
     }
 
