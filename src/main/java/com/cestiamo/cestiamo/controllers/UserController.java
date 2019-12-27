@@ -83,7 +83,7 @@ public class UserController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String token = jwtTokenUtil.generateToken(userDetails);       
         response.setHeader(tokenHeader, token);
-        return new UtenteResponse(((UserDetailsImpl) userDetails).getUtente());
+        return new UtenteResponse( ((UserDetailsImpl) userDetails).getUtente() );
     }
 
 /*

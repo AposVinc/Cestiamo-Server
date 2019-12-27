@@ -32,7 +32,7 @@ public class Utente {
 	private String citta;
 
 	@Column(name = "NASCITA",  length = 16)
-	private Date d_nascita;
+	private Date dataNascita;
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti")
@@ -105,12 +105,12 @@ public class Utente {
 		this.citta = citta;
 	}
 
-	public Date getD_nascita() {
-		return d_nascita;
+	public Date getDataNascita() {
+		return dataNascita;
 	}
 
-	public void setD_nascita(Date d_nascita) {
-		this.d_nascita = d_nascita;
+	public void setDataNascita(Date d_nascita) {
+		this.dataNascita = d_nascita;
 	}
 
 	public Set<Partita> getPartiteGiocate() { return partiteGiocate; }
