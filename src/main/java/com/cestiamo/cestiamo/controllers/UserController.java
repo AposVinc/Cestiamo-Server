@@ -119,5 +119,20 @@ public class UserController {
         return u;
     }
 */
+    @CrossOrigin("*")
+    @PostMapping("/updateUtente")
+    public UtenteResponse updateProfilo(@RequestBody Utente utente) throws BusinessException{
+        System.out.println("Entra nell update Profile");
+        Utente u1=utenteRepository.findUtenteByEmail(utente.getEmail());
+        u1.setNome(utente.getNome());
+        u1.setCognome(utente.getCognome());
+        u1.setEmail(utente.getEmail());
+        u1.setDataNascita(utente.getDataNascita());
+        utenteRepository.save(u1);
+        UtenteResponse u=new UtenteResponse(u1);
+        System.out.println("profilo aggiornato correttamente");
+        return u;
+
+    }
 }
 
