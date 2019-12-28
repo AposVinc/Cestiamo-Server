@@ -44,13 +44,15 @@ public class Utente {
 	@JsonIgnore
 	@OneToMany(mappedBy = "votante",
 				cascade = CascadeType.ALL,
-				orphanRemoval = true)
+				orphanRemoval = true,
+				fetch = FetchType.EAGER)
 	private Set<Votazione> votazioniFatte = new HashSet<>();
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "votato",
 			cascade = CascadeType.ALL,
-			orphanRemoval = true)
+			orphanRemoval = true,
+			fetch = FetchType.EAGER)
 	private Set<Votazione> votazioniRicevute = new HashSet<>();
 
 	@Lob

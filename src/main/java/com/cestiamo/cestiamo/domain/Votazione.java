@@ -51,8 +51,8 @@ public class Votazione {
     @MapsId("votatoId")
     private Utente votato;
 
-    @Column(name = "Voto")
-    private int voto;
+    @Enumerated(EnumType.STRING)
+    private Voto voto;
 
     private Votazione() {}
 
@@ -60,7 +60,7 @@ public class Votazione {
         this.votante = votante;
         this.votato = votato;
         this.id = new VotazioneId(votante.getId(), votato.getId());
-        this.voto = voto;
+        this.setVoto(voto);
     }
 
     public Utente getVotante() {
@@ -80,11 +80,43 @@ public class Votazione {
     }
 
     public int getVoto() {
-        return voto;
+        switch (this.voto){
+            case UNO:
+                return 1;
+            case DUE:
+                return 2;
+            case TRE:
+                return 3;
+            case QUATTRO:
+                return 4;
+            case CINQUE:
+                return 5;
+            default:
+                return 5;
+        }
     }
 
     public void setVoto(int voto) {
-        this.voto = voto;
+        switch (voto){
+            case 1:
+                this.voto = Voto.UNO;
+                break;
+            case 2:
+                this.voto = Voto.DUE;
+                break;
+            case 3:
+                this.voto = Voto.TRE;
+                break;
+            case 4:
+                this.voto = Voto.QUATTRO;
+                break;
+            case 5:
+                this.voto = Voto.CINQUE;
+                break;
+            default:
+                this.voto = Voto.CINQUE;
+                break;
+        }
     }
 
     @Override
