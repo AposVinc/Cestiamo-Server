@@ -38,7 +38,7 @@ public class Utente {
 	private String via;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy = "partecipanti")
+	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Partita> partiteGiocate = new HashSet<>();
 
 	@JsonIgnore
@@ -125,7 +125,11 @@ public class Utente {
 	public void addPartitaGiocata(Partita partita){
 		this.partiteGiocate.add(partita);
 	}
-	
+
+	public void removePartitaGiocata(Partita partita){
+		this.partiteGiocate.remove(partita);
+	}
+
 	public int getNumPartite() {
 		return partiteGiocate.size();
 	}

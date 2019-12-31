@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.DETACH;
+import static javax.persistence.CascadeType.PERSIST;
+
 @Entity
 @Table(name = "Partita")
 public class Partita {
@@ -31,7 +34,7 @@ public class Partita {
     private Set<Bacheca> bacheca = new HashSet<>();
 */
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="UTENTE_PARTITA",
             joinColumns={@JoinColumn(name="ID_PARTITA")},
             inverseJoinColumns={@JoinColumn(name="ID_UTENTE")})
@@ -87,6 +90,10 @@ public class Partita {
 
     public void addPartecipante(Utente partecipante) {
         this.partecipanti.add(partecipante);
+    }
+
+    public void removePartecipante(Utente partecipante) {
+        this.partecipanti.remove(partecipante);
     }
 
     @Override

@@ -3,16 +3,15 @@ package com.cestiamo.cestiamo.controllers;
 import com.cestiamo.cestiamo.business.CestiamoService;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
 import com.cestiamo.cestiamo.domain.Partita;
-import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class PartitaController {
+
     @Autowired
     PartitaRepository partitaRepository;
 
@@ -38,10 +37,19 @@ public class PartitaController {
         return p;
     }
 
+    @CrossOrigin()
     @GetMapping("/partita/{id}")
     public Partita findById(@PathVariable Long id){
         return partitaRepository.findPartitaById(id);
     }
 
+    @CrossOrigin()
+    @DeleteMapping("/removePartecipante/partita={id_p}/utente={mail_u}")
+    public void deletePartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
+        Partita p = partitaRepository.findPartitaById(id_p);
+        p.removePartecipante(cestiamoService.findUtenteByEmail(mail_u));
+
+        partitaRepository.save(p);
+    }
 
 }
