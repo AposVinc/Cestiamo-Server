@@ -64,11 +64,10 @@ public class PartitaController {
 
     @CrossOrigin()
     @DeleteMapping("/removePartecipante/partita={id_p}/utente={mail_u}")
-    public PartitaResponse deletePartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
+    public void deletePartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
         Partita p = partitaRepository.findPartitaById(id_p);
         p.removePartecipante(cestiamoService.findUtenteByEmail(mail_u));
         partitaRepository.save(p);
-        return new PartitaResponse(p);
     }
 
 }
