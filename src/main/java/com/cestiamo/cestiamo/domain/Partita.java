@@ -20,15 +20,15 @@ public class Partita {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "ID_TIPO_PARTITA" /*, nullable = false*/)
+    private TipoPartita tipologia;
+
+    @ManyToOne
     @JoinColumn(name = "ID_CAMPO" /* , nullable = false*/)
     private Campo campo;
 
     @Column(name = "DATA")
     private Date data;
-
-    @ManyToOne
-    @JoinColumn(name = "ID_TIPO_PARTITA" /*, nullable = false*/)
-    private TipoPartita tipologia;
 /*
     @OneToMany(mappedBy = "Partita")
     private Set<Bacheca> bacheca = new HashSet<>();

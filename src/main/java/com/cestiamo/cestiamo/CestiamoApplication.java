@@ -206,7 +206,6 @@ public class CestiamoApplication {
                 partecipantiP3.add(u.get(0));
                 partecipantiP3.add(u.get(1));
                 partecipantiP3.add(u.get(2));
-                partecipantiP3.add(u.get(3));
                 p3.setPartecipanti(partecipantiP3);
 
                 partitaRepository.save(p3);
