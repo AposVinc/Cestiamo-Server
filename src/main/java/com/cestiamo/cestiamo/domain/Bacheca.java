@@ -1,8 +1,8 @@
 package com.cestiamo.cestiamo.domain;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "Bacheca")
@@ -23,10 +23,10 @@ public class Bacheca {
     private Partita partita;
 */
     @Column(name = "DATA")
-    private Date data;
+    private LocalDate data;
 
     @Column(name = "ORA")
-    private Time ora;
+    private LocalTime ora;
 
     @Column(name = "TESTO")
     private String testo;
@@ -40,19 +40,19 @@ public class Bacheca {
         this.id = id;
     }
 
-    public Date getData(){
+    public LocalDate getData(){
         return data;
     }
 
-    public void setData(Date data){
+    public void setData(LocalDate data){
         this.data = data;
     }
 
-    public Time getOra() {
+    public LocalTime getOra() {
         return ora;
     }
 
-    public void setOra ( Time ora ) {
+    public void setOra ( LocalTime ora ) {
         this.ora = ora;
     }
 

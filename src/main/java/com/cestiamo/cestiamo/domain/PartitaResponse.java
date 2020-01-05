@@ -1,6 +1,6 @@
 package com.cestiamo.cestiamo.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +9,7 @@ public class PartitaResponse {
     private Long id;
     private TipoPartita tipologia;
     private Campo campo;
-    private Date data;
+    private LocalDateTime data;
     //private Set<Bacheca> bacheca = new HashSet<>();
     private Set<Utente> partecipanti = new HashSet<>();
     private int personeMancanti;
@@ -40,11 +40,11 @@ public class PartitaResponse {
         this.campo = campo;
     }
 
-    public Date getData(){
+    public LocalDateTime getData(){
         return data;
     }
 
-    public void setData(Date data){
+    public void setData(LocalDateTime data){
         this.data = data;
     }
 

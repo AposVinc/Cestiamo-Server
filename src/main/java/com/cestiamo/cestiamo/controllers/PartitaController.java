@@ -33,6 +33,7 @@ public class PartitaController {
 
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
+    controllare
     public Partita createPartita(Partita partita) {
         System.out.println("METODO CREA PARTITA");
         Partita p= new Partita();

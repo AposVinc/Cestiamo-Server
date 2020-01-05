@@ -2,13 +2,11 @@ package com.cestiamo.cestiamo.domain;
 
 import javax.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.DETACH;
-import static javax.persistence.CascadeType.PERSIST;
 
 @Entity
 @Table(name = "Partita")
@@ -28,7 +26,7 @@ public class Partita {
     private Campo campo;
 
     @Column(name = "DATA")
-    private Date data;
+    private LocalDateTime data;
 /*
     @OneToMany(mappedBy = "Partita")
     private Set<Bacheca> bacheca = new HashSet<>();
@@ -43,7 +41,7 @@ public class Partita {
 
     public Partita (){}
 
-    public Partita (Campo campo, Date data, TipoPartita tipologia, Set<Utente> partecipanti){
+    public Partita (Campo campo, LocalDateTime data, TipoPartita tipologia, Set<Utente> partecipanti){
         this.campo = campo;
         this.data = data;
         this.tipologia = tipologia;
@@ -64,11 +62,11 @@ public class Partita {
         this.campo = campo;
     }
 
-    public Date getData(){
+    public LocalDateTime getData(){
         return data;
     }
 
-    public void setData(Date data){
+    public void setData(LocalDateTime data){
         this.data = data;
     }
 
