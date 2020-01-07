@@ -59,8 +59,8 @@ public class CestiamoServiceImpl implements CestiamoService {
     }
 
     @Override
-    public void createPartita(Partita p) throws BusinessException {
-        partitaRepository.save(p);
+    public void createPartita(Partita partita) throws BusinessException {
+        partitaRepository.save(partita);
     }
 
 

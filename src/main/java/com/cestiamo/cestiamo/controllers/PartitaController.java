@@ -4,6 +4,7 @@ import com.cestiamo.cestiamo.business.CestiamoService;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.PartitaResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +21,11 @@ public class PartitaController {
     @Autowired
     CestiamoService cestiamoService;
 
+
     @CrossOrigin()
     @GetMapping("/getListaPartite")
     public List<PartitaResponse> getPartite() {
-        List<Partita> partite = cestiamoService.findAllPartite();
+       List<Partita> partite = cestiamoService.findAllPartite();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p: partite) {
             partiteResponse.add(new PartitaResponse(p));
@@ -34,14 +36,14 @@ public class PartitaController {
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
     public Partita createPartita(Partita partita) {
-        System.out.println("METODO CREA PARTITA");
+        System.out.println("ENTRA NEL METODO CREA PARTITA");
         Partita p= new Partita();
         p.setCampo(partita.getCampo());
         p.setData(partita.getData());
         p.setTipologia(partita.getTipologia());
         cestiamoService.createPartita(partita);
         System.out.println("partita creata");
-        return p;
+        return partita;
     }
 
     @CrossOrigin()
