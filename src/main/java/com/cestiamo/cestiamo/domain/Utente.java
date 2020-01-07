@@ -39,6 +39,10 @@ public class Utente {
 	@Column(name = "VIA", length = 225)
 	private String via;
 
+	@OneToOne(mappedBy = "mittente")
+	@JsonIgnore
+	private Messaggio messaggio;
+
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Partita> partiteGiocate = new HashSet<>();

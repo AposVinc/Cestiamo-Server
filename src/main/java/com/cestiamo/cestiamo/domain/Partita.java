@@ -27,10 +27,10 @@ public class Partita {
 
     @Column(name = "DATA")
     private LocalDateTime data;
-/*
-    @OneToMany(mappedBy = "Partita")
-    private Set<Bacheca> bacheca = new HashSet<>();
-*/
+
+    @OneToMany(mappedBy = "partita")
+    @OrderBy("data asc")
+    private Set<Messaggio> messaggi = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="UTENTE_PARTITA",
@@ -54,6 +54,14 @@ public class Partita {
         this.id = id;
     }
 
+    public TipoPartita getTipologia(){
+        return tipologia;
+    }
+
+    public void setTipologia(TipoPartita tipologia) {
+        this.tipologia = tipologia;
+    }
+
     public Campo getCampo() {
         return campo;
     }
@@ -70,12 +78,13 @@ public class Partita {
         this.data = data;
     }
 
-    public TipoPartita getTipologia(){
-        return tipologia;
+
+    public Set<Messaggio> getMessaggi() {
+        return messaggi;
     }
 
-    public void setTipologia(TipoPartita tipologia) {
-        this.tipologia = tipologia;
+    public void setMessaggi(Set<Messaggio> messaggi) {
+        this.messaggi = messaggi;
     }
 
     public Set<Utente> getPartecipanti() {
