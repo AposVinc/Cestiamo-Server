@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 @SpringBootApplication
@@ -21,7 +22,8 @@ public class CestiamoApplication {
 
 	@Bean
 	public CommandLineRunner loadData(UtenteRepository utenteRepository, TipoPartitaRepository tipoPartitaRepository,
-                                      CampoRepository campoRepository, PartitaRepository partitaRepository, VotazioneRepository votazioneRepository) {
+                                      CampoRepository campoRepository, PartitaRepository partitaRepository,
+                                      VotazioneRepository votazioneRepository, MessaggioRepository messaggioRepository) {
 
 		return (args) -> {
 			try {
@@ -177,7 +179,6 @@ public class CestiamoApplication {
 
                 Partita p2 = new Partita();
                 p2.setCampo(c.get(1));
-                //p2.setData(new GregorianCalendar(2019, Calendar.OCTOBER,14,19,12).getTime());
                 p2.setData(LocalDateTime.of(2020,5,12,18,0));
 
                 p2.setTipologia(t.get(1));
@@ -194,7 +195,6 @@ public class CestiamoApplication {
 
                 Partita p3 = new Partita();
                 p3.setCampo(c.get(1));
-                //p3.setData(new GregorianCalendar(2020, Calendar.MARCH,30,19,12).getTime());
                 p3.setData(LocalDateTime.of(2020,4,4,13,15));
 
                 p3.setTipologia(t.get(1));
@@ -216,6 +216,38 @@ public class CestiamoApplication {
             }
 
             List<Partita> p = partitaRepository.findAll();
+
+            try {
+                Messaggio m1 = new Messaggio();
+                m1.setMittente(u.get(0));
+                m1.setData(LocalDate.of(2020,1,4));
+                m1.setOra(LocalTime.of(10,3));
+                m1.setTesto("Ciao, sono l'utente 1");
+                m1.setPartita(p.get(1));
+
+                Messaggio m2 = new Messaggio();
+                m2.setMittente(u.get(1));
+                m2.setData(LocalDate.of(2020,1,5));
+                m2.setOra(LocalTime.of(15,15));
+                m2.setTesto("Ciao, sono l'utente 2");
+                m2.setPartita(p.get(1));
+
+                Messaggio m3 = new Messaggio();
+                m3.setMittente(u.get(0));
+                m3.setData(LocalDate.of(2020,1,5));
+                m3.setOra(LocalTime.of(16,56));
+                m3.setTesto("utente 1");
+                m3.setPartita(p.get(1));
+
+                messaggioRepository.save(m1);
+                messaggioRepository.save(m2);
+                messaggioRepository.save(m3);
+
+                System.out.println('\n' + "Messaggi p2 SALVATE" +'\n');
+
+            } catch (Exception ex) {
+                System.out.println("ERROR");
+            }
 
 		};
 	}
