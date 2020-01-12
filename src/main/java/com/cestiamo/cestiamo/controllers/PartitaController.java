@@ -1,7 +1,9 @@
 package com.cestiamo.cestiamo.controllers;
 
 import com.cestiamo.cestiamo.business.CestiamoService;
+import com.cestiamo.cestiamo.business.impl.repositories.MessaggioRepository;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
+import com.cestiamo.cestiamo.domain.Messaggio;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.PartitaResponse;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -17,6 +20,12 @@ public class PartitaController {
 
     @Autowired
     PartitaRepository partitaRepository;
+
+    @Autowired
+    UserController utenteRepository;
+
+    @Autowired
+    MessaggioRepository messaggioRepository;
 
     @Autowired
     CestiamoService cestiamoService;
@@ -35,6 +44,7 @@ public class PartitaController {
 
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
+    //controllare
     public Partita createPartita(Partita partita) {
         System.out.println("ENTRA NEL METODO CREA PARTITA");
         Partita p= new Partita();
@@ -70,6 +80,25 @@ public class PartitaController {
         Partita p = partitaRepository.findPartitaById(id_p);
         p.removePartecipante(cestiamoService.findUtenteByEmail(mail_u));
         partitaRepository.save(p);
+    }
+
+    @CrossOrigin()
+    @GetMapping("/partita/{id}/bacheca")
+    public Set<Messaggio> findMessaggiByIdPartita(@PathVariable Long id){
+        Partita p = partitaRepository.findPartitaById(id);
+        return p.getMessaggi();
+    }
+
+    @PostMapping("/partita/{id}/bacheca/addMessaggio")
+    public Messaggio addMessaggio(@PathVariable Long id, @RequestBody Messaggio msg) {
+        Partita p = partitaRepository.findPartitaById(id);
+        Messaggio m = new Messaggio();
+        m.setMittente(utenteRepository.findByEmail(msg.getMittente().getEmail()));
+        m.setData(msg.getData());
+        m.setTesto(msg.getTesto());
+        m.setPartita(p);
+
+        return messaggioRepository.save(m);
     }
 
 }

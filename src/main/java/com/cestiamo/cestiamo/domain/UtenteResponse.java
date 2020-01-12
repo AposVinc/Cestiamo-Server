@@ -1,6 +1,6 @@
 package com.cestiamo.cestiamo.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class UtenteResponse {
 
@@ -9,7 +9,7 @@ public class UtenteResponse {
     private String email;
     private String password;
     private String citta;
-    private Date dataNascita;
+    private LocalDate dataNascita;
     private int numPartite;
     private int mediaVoto;
     private String img;
@@ -68,11 +68,11 @@ public class UtenteResponse {
         this.citta = citta;
     }
 
-    public Date getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(Date d_nascita) {
+    public void setDataNascita(LocalDate d_nascita) {
         this.dataNascita = d_nascita;
     }
 

@@ -2,13 +2,11 @@ package com.cestiamo.cestiamo.domain;
 
 import javax.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.DETACH;
-import static javax.persistence.CascadeType.PERSIST;
 
 @Entity
 @Table(name = "Partita")
@@ -28,11 +26,11 @@ public class Partita {
     private Campo campo;
 
     @Column(name = "DATA")
-    private Date data;
-/*
-    @OneToMany(mappedBy = "Partita")
-    private Set<Bacheca> bacheca = new HashSet<>();
-*/
+    private LocalDateTime data;
+
+    @OneToMany(mappedBy = "partita")
+    @OrderBy("data asc")
+    private Set<Messaggio> messaggi = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="UTENTE_PARTITA",
@@ -43,7 +41,7 @@ public class Partita {
 
     public Partita (){}
 
-    public Partita (Campo campo, Date data, TipoPartita tipologia, Set<Utente> partecipanti){
+    public Partita (Campo campo, LocalDateTime data, TipoPartita tipologia, Set<Utente> partecipanti){
         this.campo = campo;
         this.data = data;
         this.tipologia = tipologia;
@@ -56,6 +54,14 @@ public class Partita {
         this.id = id;
     }
 
+    public TipoPartita getTipologia(){
+        return tipologia;
+    }
+
+    public void setTipologia(TipoPartita tipologia) {
+        this.tipologia = tipologia;
+    }
+
     public Campo getCampo() {
         return campo;
     }
@@ -64,20 +70,21 @@ public class Partita {
         this.campo = campo;
     }
 
-    public Date getData(){
+    public LocalDateTime getData(){
         return data;
     }
 
-    public void setData(Date data){
+    public void setData(LocalDateTime data){
         this.data = data;
     }
 
-    public TipoPartita getTipologia(){
-        return tipologia;
+
+    public Set<Messaggio> getMessaggi() {
+        return messaggi;
     }
 
-    public void setTipologia(TipoPartita tipologia) {
-        this.tipologia = tipologia;
+    public void setMessaggi(Set<Messaggio> messaggi) {
+        this.messaggi = messaggi;
     }
 
     public Set<Utente> getPartecipanti() {

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Utente")
@@ -32,10 +34,14 @@ public class Utente {
 	private String citta;
 
 	@Column(name = "NASCITA",  length = 16)
-	private Date dataNascita;
+	private LocalDate dataNascita;
 
 	@Column(name = "VIA", length = 225)
 	private String via;
+
+	@OneToOne(mappedBy = "mittente")
+	@JsonIgnore
+	private Messaggio messaggio;
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -108,11 +114,11 @@ public class Utente {
 		this.citta = citta;
 	}
 
-	public Date getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(Date d_nascita) {
+	public void setDataNascita(LocalDate d_nascita) {
 		this.dataNascita = d_nascita;
 	}
 
