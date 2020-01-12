@@ -25,6 +25,7 @@ public class UtenteResponse {
         this.citta=u.getCitta();
         this.dataNascita=u.getDataNascita();
         this.numPartite=u.getNumPartite();
+        this.mediaVoto=u.getMediaVoto();
         this.img=new String(u.getImg());
     }
 
