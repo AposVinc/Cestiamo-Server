@@ -1,6 +1,7 @@
 package com.cestiamo.cestiamo.controllers;
 
 import com.cestiamo.cestiamo.business.CestiamoService;
+import com.cestiamo.cestiamo.business.impl.repositories.MessaggioRepository;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
 import com.cestiamo.cestiamo.domain.Messaggio;
 import com.cestiamo.cestiamo.domain.Partita;
@@ -18,6 +19,12 @@ public class PartitaController {
 
     @Autowired
     PartitaRepository partitaRepository;
+
+    @Autowired
+    UserController utenteRepository;
+
+    @Autowired
+    MessaggioRepository messaggioRepository;
 
     @Autowired
     CestiamoService cestiamoService;
@@ -78,6 +85,18 @@ public class PartitaController {
     public Set<Messaggio> findMessaggiByIdPartita(@PathVariable Long id){
         Partita p = partitaRepository.findPartitaById(id);
         return p.getMessaggi();
+    }
+
+    @PostMapping("/partita/{id}/bacheca/addMessaggio")
+    public Messaggio addMessaggio(@PathVariable Long id, @RequestBody Messaggio msg) {
+        Partita p = partitaRepository.findPartitaById(id);
+        Messaggio m = new Messaggio();
+        m.setMittente(utenteRepository.findByEmail(msg.getMittente().getEmail()));
+        m.setData(msg.getData());
+        m.setTesto(msg.getTesto());
+        m.setPartita(p);
+
+        return messaggioRepository.save(m);
     }
 
 }

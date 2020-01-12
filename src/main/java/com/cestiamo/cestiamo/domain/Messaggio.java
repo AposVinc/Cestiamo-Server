@@ -3,8 +3,7 @@ package com.cestiamo.cestiamo.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Messaggio")
@@ -20,10 +19,7 @@ public class Messaggio {
     private Utente mittente;
 
     @Column(name = "DATA")
-    private LocalDate data;
-
-    @Column(name = "ORA")
-    private LocalTime ora;
+    private LocalDateTime data;
 
     @Column(name = "TESTO")
     private String testo;
@@ -51,20 +47,12 @@ public class Messaggio {
         this.mittente = mittente;
     }
 
-    public LocalDate getData(){
+    public LocalDateTime getData(){
         return data;
     }
 
-    public void setData(LocalDate data){
+    public void setData(LocalDateTime data){
         this.data = data;
-    }
-
-    public LocalTime getOra() {
-        return ora;
-    }
-
-    public void setOra ( LocalTime ora ) {
-        this.ora = ora;
     }
 
     public String getTesto(){
@@ -82,4 +70,5 @@ public class Messaggio {
     public void setPartita(Partita partita) {
         this.partita = partita;
     }
+
 }

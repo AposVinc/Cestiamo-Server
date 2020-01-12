@@ -220,22 +220,19 @@ public class CestiamoApplication {
             try {
                 Messaggio m1 = new Messaggio();
                 m1.setMittente(u.get(0));
-                m1.setData(LocalDate.of(2020,1,4));
-                m1.setOra(LocalTime.of(10,3));
+                m1.setData(LocalDateTime.of(2020,1,4,10,3));
                 m1.setTesto("Ciao, sono l'utente 1");
                 m1.setPartita(p.get(1));
 
                 Messaggio m2 = new Messaggio();
                 m2.setMittente(u.get(1));
-                m2.setData(LocalDate.of(2020,1,5));
-                m2.setOra(LocalTime.of(15,15));
+                m2.setData(LocalDateTime.of(2020,1,5,15,15));
                 m2.setTesto("Ciao, sono l'utente 2");
                 m2.setPartita(p.get(1));
 
                 Messaggio m3 = new Messaggio();
                 m3.setMittente(u.get(0));
-                m3.setData(LocalDate.of(2020,1,5));
-                m3.setOra(LocalTime.of(16,56));
+                m3.setData(LocalDateTime.of(2020,1,5,16,56));
                 m3.setTesto("utente 1");
                 m3.setPartita(p.get(1));
 

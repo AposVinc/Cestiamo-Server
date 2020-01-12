@@ -10,7 +10,6 @@ public class PartitaResponse {
     private TipoPartita tipologia;
     private Campo campo;
     private LocalDateTime data;
-    //private Set<Bacheca> bacheca = new HashSet<>();
     private Set<Utente> partecipanti = new HashSet<>();
     private int personeMancanti;
 
