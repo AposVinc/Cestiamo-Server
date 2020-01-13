@@ -10,6 +10,7 @@ import com.cestiamo.cestiamo.domain.PartitaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -44,16 +45,9 @@ public class PartitaController {
 
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
-    //controllare
-    public Partita createPartita(Partita partita) {
-        System.out.println("ENTRA NEL METODO CREA PARTITA");
-        Partita p= new Partita();
-        p.setCampo(partita.getCampo());
-        p.setData(partita.getData());
-        p.setTipologia(partita.getTipologia());
-        cestiamoService.createPartita(partita);
-        System.out.println("partita creata");
-        return partita;
+    public PartitaResponse createPartita(@RequestBody Partita p, @RequestBody LocalTime o){
+
+        return new PartitaResponse();
     }
 
     @CrossOrigin()
@@ -65,13 +59,12 @@ public class PartitaController {
 
     @CrossOrigin()
     @PutMapping("/addPartecipante/partita={id_p}/utente={mail_u}")
-    public void addPartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
-        System.out.println(id_p + "  " + mail_u +"\n");
-
+    public PartitaResponse addPartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
         Partita p = partitaRepository.findPartitaById(id_p);
         p.addPartecipante(cestiamoService.findUtenteByEmail(mail_u));
 
         partitaRepository.save(p);
+        return new PartitaResponse(p);
     }
 
     @CrossOrigin()
@@ -89,14 +82,11 @@ public class PartitaController {
         return p.getMessaggi();
     }
 
+    @CrossOrigin()
     @PostMapping("/partita/{id}/bacheca/addMessaggio")
     public Messaggio addMessaggio(@PathVariable Long id, @RequestBody Messaggio msg) {
         Partita p = partitaRepository.findPartitaById(id);
-        Messaggio m = new Messaggio();
-        m.setMittente(utenteRepository.findByEmail(msg.getMittente().getEmail()));
-        m.setData(msg.getData());
-        m.setTesto(msg.getTesto());
-        m.setPartita(p);
+        Messaggio m = new Messaggio(utenteRepository.findByEmail(msg.getMittente().getEmail()), msg.getData(), msg.getTesto(), p);
 
         return messaggioRepository.save(m);
     }

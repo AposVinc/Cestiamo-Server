@@ -78,7 +78,6 @@ public class Partita {
         this.data = data;
     }
 
-
     public Set<Messaggio> getMessaggi() {
         return messaggi;
     }
