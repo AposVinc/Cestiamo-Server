@@ -7,9 +7,11 @@ import com.cestiamo.cestiamo.domain.Messaggio;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.PartitaResponse;
 
+import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +40,39 @@ public class PartitaController {
        List<Partita> partite = cestiamoService.findAllPartite();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p: partite) {
-            partiteResponse.add(new PartitaResponse(p));
+            if (p.getData().isAfter(LocalDateTime.now())){
+            partiteResponse.add(new PartitaResponse(p));}
         }
         return partiteResponse;
+    }
+
+
+    @CrossOrigin()
+    @GetMapping("/getListaMiePartite/utente={mail}")
+    public List<PartitaResponse> getListaMiePartite(@PathVariable String mail){
+        Utente u = cestiamoService.findUtenteByEmail(mail);
+        Set<Partita> partite = u.getPartiteGiocate();
+        List<PartitaResponse> partiteResponse = new ArrayList<>();
+        for (Partita p :partite){
+            if (p.getData().isAfter(LocalDateTime.now())){
+                partiteResponse.add(new PartitaResponse(p));
+            }
+        }
+        return partiteResponse;
+    }
+
+    @CrossOrigin()
+    @GetMapping("/getListaPartiteGiocate/utente={mail}")
+    public List<PartitaResponse> getListaPartiteGiocate(@PathVariable String mail){
+        Utente u = cestiamoService.findUtenteByEmail(mail);
+        Set<Partita> partite = u.getPartiteGiocate();
+        List<PartitaResponse> partiteResponse = new ArrayList<>();
+        for (Partita p : partite){
+            if (p.getData().isBefore(LocalDateTime.now())){
+                partiteResponse.add(new PartitaResponse(p));
+            }
+        }
+        return  partiteResponse;
     }
 
     @CrossOrigin()
@@ -90,5 +122,6 @@ public class PartitaController {
 
         return messaggioRepository.save(m);
     }
+
 
 }
