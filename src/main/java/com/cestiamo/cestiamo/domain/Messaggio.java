@@ -29,6 +29,15 @@ public class Messaggio {
     @JoinColumn(name = "ID_PARTITA", nullable = false)
     private Partita partita;
 
+    public Messaggio() {
+    }
+
+    public Messaggio(Utente u, LocalDateTime d, String t, Partita p) {
+        this.mittente = u;
+        this.data = d;
+        this.testo = t;
+        this.partita = p;
+    }
 
 
     public Long getId() {
