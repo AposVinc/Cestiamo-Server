@@ -7,6 +7,7 @@ import com.cestiamo.cestiamo.domain.Messaggio;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.PartitaResponse;
 
+import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,9 +46,10 @@ public class PartitaController {
 
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
-    public PartitaResponse createPartita(@RequestBody Partita p, @RequestBody LocalTime o){
-
-        return new PartitaResponse();
+    public PartitaResponse createPartita(@RequestBody Partita p, @RequestBody Utente u){
+        p.addPartecipante(u);
+        System.out.println(p);
+        return new PartitaResponse(partitaRepository.save(p));
     }
 
     @CrossOrigin()
