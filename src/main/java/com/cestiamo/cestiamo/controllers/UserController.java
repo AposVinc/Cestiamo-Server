@@ -132,7 +132,18 @@ public class UserController {
         UtenteResponse u=new UtenteResponse(u1);
         System.out.println("profilo aggiornato correttamente");
         return u;
+    }
 
+    @CrossOrigin("*")
+    @PostMapping("/votaUtente")
+    public UtenteResponse votaUtente(@RequestBody Utente utente){
+        System.out.println("entra nel vota utente");
+        Utente u=utenteRepository.findUtenteByEmail(utente.getEmail());
+        u.setVotazioniRicevute(utente.getVotazioniRicevute());
+        utenteRepository.save(u);
+        UtenteResponse u1=new UtenteResponse(u);
+        System.out.println("esce dal vota utente");
+        return u1;
     }
 }
 
