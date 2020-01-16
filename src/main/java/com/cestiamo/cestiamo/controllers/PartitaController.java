@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -74,13 +73,20 @@ public class PartitaController {
         }
         return  partiteResponse;
     }
+    static class NuovaPartita {
+        public Partita partita;
+        public Utente creatore;
+    }
 
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
-    public PartitaResponse createPartita(@RequestBody Partita p, @RequestBody Utente u){
-        p.addPartecipante(u);
-        System.out.println(p);
-        return new PartitaResponse(partitaRepository.save(p));
+    public PartitaResponse createPartita(@RequestBody NuovaPartita np){
+        Utente utente = utenteRepository.findByEmail(np.creatore.getEmail());
+        System.out.println(utente.getEmail());
+        np.partita.addPartecipante(utente);
+        System.out.println(utente);
+        System.out.println(np.partita);
+        return new PartitaResponse(partitaRepository.save(np.partita));
     }
 
     @CrossOrigin()
