@@ -9,6 +9,7 @@ import java.util.Set;
 
 
 @Entity
+order by data asc
 @Table(name = "Partita")
 public class Partita {
 
