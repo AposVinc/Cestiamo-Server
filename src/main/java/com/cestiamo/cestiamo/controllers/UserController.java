@@ -34,7 +34,6 @@ public class UserController {
     @Autowired
     private VotazioneRepository votazioneRepository;
 
-
     @Value("${jwt.header}")
     private String tokenHeader;
 
@@ -50,22 +49,24 @@ public class UserController {
     @CrossOrigin()
     @RequestMapping("/creaUtente")
     public String creaUtente(@RequestBody Utente u){
-        
         try {
             Utente user=new Utente();        
             user.setNome((u.getNome()));
             user.setCognome((u.getCognome()));
             user.setEmail(u.getEmail());
+            user.setCitta(u.getCitta());
+            user.setVia(u.getVia());
             user.setPassword(passwordEncoder.encode(u.getPassword()));            
             user.setDataNascita((u.getDataNascita()));
             user.setImg(new byte[0]);
             utenteRepository.save(user);
+            System.out.println(user);
         }catch (Exception ex) {
             System.out.println(ex);
         }
-        
         return "Utente creato";
     }
+
     //@CrossOrigin()
     @RequestMapping("/getUtente")
     public List<Utente> getUtenti(){
@@ -107,20 +108,9 @@ public class UserController {
         UtenteResponse u1=new UtenteResponse(utente);
         return u1;
     }
-
-    //@CrossOrigin("*")
-    @PostMapping("/updateProfilo")
-    public UtenteResponse updateProfilo(@RequestBody Utente utente) throws BusinessException {
-        Utente u1=utenteRepository.findUtenteByEmail(utente.getEmail());
-        u1.setNome(ConvertString.convert(utente.getNome()));
-        u1.setCognome(ConvertString.convert(utente.getCognome()));
-        u1.setEmail(utente.getEmail());
-        u1.setD_nascita(utente.getD_nascita());
-        utenteRepository.save(u1);
-        UtenteResponse u=new UtenteResponse(u1);
-        return u;
-    }
 */
+
+
     @CrossOrigin("*")
     @PostMapping("/updateUtente")
     public UtenteResponse updateProfilo(@RequestBody Utente utente) throws BusinessException{
