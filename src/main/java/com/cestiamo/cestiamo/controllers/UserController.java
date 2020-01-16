@@ -3,6 +3,7 @@ package com.cestiamo.cestiamo.controllers;
 import com.cestiamo.cestiamo.business.BusinessException;
 import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
 //import com.cestiamo.cestiamo.Utility;
+import com.cestiamo.cestiamo.business.impl.repositories.VotazioneRepository;
 import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.Utente;
 import com.cestiamo.cestiamo.domain.UtenteResponse;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     private UtenteRepository utenteRepository;
 
+    @Autowired
+    private VotazioneRepository votazioneRepository;
+
 
     @Value("${jwt.header}")
     private String tokenHeader;
@@ -43,18 +47,17 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-/*
-    //@CrossOrigin()
+    @CrossOrigin()
     @RequestMapping("/creaUtente")
     public String creaUtente(@RequestBody Utente u){
         
         try {
             Utente user=new Utente();        
-            user.setNome(ConvertString.convert(u.getNome()));
-            user.setCognome(ConvertString.convert(u.getCognome()));
+            user.setNome((u.getNome()));
+            user.setCognome((u.getCognome()));
             user.setEmail(u.getEmail());
             user.setPassword(passwordEncoder.encode(u.getPassword()));            
-            user.setD_nascita(ConvertDate.convert(u.getD_nascita()));
+            user.setDataNascita((u.getDataNascita()));
             user.setImg(new byte[0]);
             utenteRepository.save(user);
         }catch (Exception ex) {
@@ -63,7 +66,6 @@ public class UserController {
         
         return "Utente creato";
     }
-*/
     //@CrossOrigin()
     @RequestMapping("/getUtente")
     public List<Utente> getUtenti(){
@@ -139,11 +141,14 @@ public class UserController {
     public UtenteResponse votaUtente(@RequestBody Utente utente){
         System.out.println("entra nel vota utente");
         Utente u=utenteRepository.findUtenteByEmail(utente.getEmail());
+        System.out.println("1");
         u.setVotazioniRicevute(utente.getVotazioniRicevute());
-        utenteRepository.save(u);
-        UtenteResponse u1=new UtenteResponse(u);
-        System.out.println("esce dal vota utente");
-        return u1;
+        System.out.println("2");
+        //utenteRepository.save(u);
+        System.out.println("3");
+        //UtenteResponse u1=new UtenteResponse(u);
+        System.out.println("4");
+        return new UtenteResponse();
     }
 }
 
