@@ -18,15 +18,15 @@ public class Partita {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_TIPO_PARTITA" /*, nullable = false*/)
-    private TipoPartita tipologia;
-
-    @ManyToOne
-    @JoinColumn(name = "ID_CAMPO"/*, nullable = false*/)
+    @JoinColumn(name = "ID_CAMPO", nullable = false)
     private Campo campo;
 
     @Column(name = "DATA")
     private LocalDateTime data;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_TIPO_PARTITA" , nullable = false)
+    private TipoPartita tipologia;
 
     @OneToMany(mappedBy = "partita")
     @OrderBy("data asc")
