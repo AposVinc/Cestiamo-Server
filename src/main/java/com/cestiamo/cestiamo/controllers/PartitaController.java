@@ -36,7 +36,7 @@ public class PartitaController {
     @CrossOrigin()
     @GetMapping("/getListaPartite")
     public List<PartitaResponse> getPartite() {
-       List<Partita> partite = cestiamoService.findAllPartite();
+        List<Partita> partite = cestiamoService.findAllPartite();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p: partite) {
             if (p.getData().isAfter(LocalDateTime.now())){
@@ -50,7 +50,7 @@ public class PartitaController {
     @GetMapping("/getListaMiePartite/utente={mail}")
     public List<PartitaResponse> getListaMiePartite(@PathVariable String mail){
         Utente u = cestiamoService.findUtenteByEmail(mail);
-        Set<Partita> partite = u.getPartiteGiocate();
+        Set<Partita> partite = u.getPartiteFuture();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p :partite){
             if (p.getData().isAfter(LocalDateTime.now())){
@@ -73,6 +73,8 @@ public class PartitaController {
         }
         return  partiteResponse;
     }
+
+
     static class NuovaPartita {
         public Partita partita;
         public Utente creatore;

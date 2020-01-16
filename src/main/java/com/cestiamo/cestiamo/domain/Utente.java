@@ -45,7 +45,13 @@ public class Utente {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy("data desc")
 	private Set<Partita> partiteGiocate = new HashSet<>();
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy("data asc ")
+	private Set<Partita> partiteFuture = new HashSet<>();
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "votante",
@@ -120,6 +126,20 @@ public class Utente {
 
 	public void setDataNascita(LocalDate d_nascita) {
 		this.dataNascita = d_nascita;
+	}
+
+	public Set<Partita> getPartiteFuture() { return partiteFuture; }
+
+	public void setPartiteFuture(Set<Partita> partite_future) {
+		this.partiteFuture = partite_future;
+	}
+
+	public void addPartitaFutura(Partita partita){
+		this.partiteFuture.add(partita);
+	}
+
+	public void removePartitaFutura(Partita partita){
+		this.partiteFuture.remove(partita);
 	}
 
 	public Set<Partita> getPartiteGiocate() { return partiteGiocate; }
