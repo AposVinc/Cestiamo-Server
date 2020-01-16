@@ -143,7 +143,7 @@ public class CestiamoApplication {
 
                 Campo c2 = new Campo();
                 c2.setCitta("Avezzano");
-                c2.setVia("Via XX Settempre, 150");
+                c2.setVia("Via XX Settembre, 150");
                 c2.setTelefono("347 2345678");
 
                 Campo c3 = new Campo();
