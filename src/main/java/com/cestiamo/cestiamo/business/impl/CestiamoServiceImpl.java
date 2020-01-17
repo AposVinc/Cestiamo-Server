@@ -8,6 +8,7 @@ import com.cestiamo.cestiamo.domain.Partita;
 import com.cestiamo.cestiamo.domain.TipoPartita;
 import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +41,7 @@ public class CestiamoServiceImpl implements CestiamoService {
 
     @Override
     public List<Partita> findAllPartite () throws BusinessException {
-        return partitaRepository.findAll();
+        return partitaRepository.findAll(Sort.by(Sort.Direction.ASC, "data"));
     }
 
     @Override
