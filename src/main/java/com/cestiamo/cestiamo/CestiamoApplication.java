@@ -84,9 +84,9 @@ public class CestiamoApplication {
 
 			try {
 			    List<Votazione> votazioneList = new LinkedList<>() ;
-			    votazioneList.add(new Votazione(u.get(0),u.get(1),5));
-			    votazioneList.add(new Votazione(u.get(0),u.get(2),2));
-			    votazioneList.add(new Votazione(u.get(0),u.get(3),3));
+			    //votazioneList.add(new Votazione(u.get(0),u.get(1),5));
+			    //votazioneList.add(new Votazione(u.get(0),u.get(2),2));
+			    //votazioneList.add(new Votazione(u.get(0),u.get(3),3));
 			    votazioneList.add(new Votazione(u.get(1),u.get(0),4));
 			    votazioneList.add(new Votazione(u.get(1),u.get(2),1));
 			    votazioneList.add(new Votazione(u.get(1),u.get(3),2));
