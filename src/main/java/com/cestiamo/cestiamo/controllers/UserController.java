@@ -141,7 +141,7 @@ public class UserController {
 
     @CrossOrigin()
     @GetMapping("/votazione/votante={votanteEmail}/votato={votatoEmail}")
-    public int findVoto(@PathVariable String votanteEmail, @PathVariable String votatoEmail){
+    public int getVoto(@PathVariable String votanteEmail, @PathVariable String votatoEmail){
         Utente votante = utenteRepository.findUtenteByEmail(votanteEmail);
         Utente votato = utenteRepository.findUtenteByEmail(votatoEmail);
         return votazioneRepository.findByVotanteAndVotato(votante, votato).getVoto();
