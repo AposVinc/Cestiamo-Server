@@ -4,9 +4,7 @@ import com.cestiamo.cestiamo.business.BusinessException;
 import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
 //import com.cestiamo.cestiamo.Utility;
 import com.cestiamo.cestiamo.business.impl.repositories.VotazioneRepository;
-import com.cestiamo.cestiamo.domain.Partita;
-import com.cestiamo.cestiamo.domain.Utente;
-import com.cestiamo.cestiamo.domain.UtenteResponse;
+import com.cestiamo.cestiamo.domain.*;
 import com.cestiamo.cestiamo.spring.security.JWTTokenUtil;
 import com.cestiamo.cestiamo.spring.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +65,7 @@ public class UserController {
         return "Utente creato";
     }
 
-    //@CrossOrigin()
+    @CrossOrigin()
     @RequestMapping("/getUtente")
     public List<Utente> getUtenti(){
         return  utenteRepository.findAll();
@@ -78,7 +76,7 @@ public class UserController {
         return utenteRepository.findUtenteByEmail(email);
     }
 
-    //@CrossOrigin("*")
+    @CrossOrigin("*")
     @PostMapping("/login")
     public UtenteResponse login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws AuthenticationException {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
@@ -126,19 +124,27 @@ public class UserController {
         return u;
     }
 
+
+    static class NuovaVotazione {
+        public Utente votante;
+        public Utente votato;
+        public int voto;
+    }
     @CrossOrigin("*")
-    @PostMapping("/votaUtente")
-    public UtenteResponse votaUtente(@RequestBody Utente utente){
-        System.out.println("entra nel vota utente");
-        Utente u=utenteRepository.findUtenteByEmail(utente.getEmail());
-        System.out.println("1");
-        u.setVotazioniRicevute(utente.getVotazioniRicevute());
-        System.out.println("2");
-        //utenteRepository.save(u);
-        System.out.println("3");
-        //UtenteResponse u1=new UtenteResponse(u);
-        System.out.println("4");
-        return new UtenteResponse();
+    @PostMapping("/votazione")
+    public UtenteResponse votaUtente(@RequestBody NuovaVotazione nv){
+        Votazione v = new Votazione(utenteRepository.findUtenteByEmail(nv.votante.getEmail()),utenteRepository.findUtenteByEmail(nv.votato.getEmail()),nv.voto);
+        votazioneRepository.save(v);
+        return new UtenteResponse(utenteRepository.findUtenteByEmail(nv.votato.getEmail()));
+    }
+
+
+    @CrossOrigin()
+    @GetMapping("/votazione/votante={votanteEmail}/votato={votatoEmail}")
+    public int getVoto(@PathVariable String votanteEmail, @PathVariable String votatoEmail){
+        Utente votante = utenteRepository.findUtenteByEmail(votanteEmail);
+        Utente votato = utenteRepository.findUtenteByEmail(votatoEmail);
+        return votazioneRepository.findByVotanteAndVotato(votante, votato).getVoto();
     }
 }
 
