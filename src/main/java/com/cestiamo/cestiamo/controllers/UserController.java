@@ -89,16 +89,14 @@ public class UserController {
     @CrossOrigin("*")
     @PostMapping("/updateUtente")
     public UtenteResponse updateProfilo(@RequestBody Utente utente) throws BusinessException{
-        System.out.println("Entra nell update Profile");
-        Utente u=utenteRepository.findUtenteByEmail(utente.getEmail());
+        Utente u = utenteRepository.findUtenteByEmail(utente.getEmail());
         u.setNome(utente.getNome());
         u.setCognome(utente.getCognome());
         u.setEmail(utente.getEmail());
+        u.setCitta(utente.getCitta());
+        u.setVia(utente.getVia());
         u.setDataNascita(utente.getDataNascita());
-        u.setImg(utente.getImg());
-        utenteRepository.save(u);
-        System.out.println("profilo aggiornato correttamente");
-        return new UtenteResponse(u);
+        return new UtenteResponse(utenteRepository.save(u));
     }
 
     @CrossOrigin("*")
