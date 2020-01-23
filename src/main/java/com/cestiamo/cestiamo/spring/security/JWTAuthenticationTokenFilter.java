@@ -43,8 +43,6 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
             // Ricostruisco l'userdetails con i dati contenuti nel token
             // controllo integrita' token
             if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-                System.out.println(authToken);
-                System.out.println(userDetails);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);

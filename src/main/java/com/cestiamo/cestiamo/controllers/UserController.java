@@ -68,12 +68,6 @@ public class UserController {
         return "Utente creato";
     }
 
-    @CrossOrigin()
-    @RequestMapping("/getUtente")
-    public List<Utente> getUtenti(){
-        return  utenteRepository.findAll();
-    }
-
     @GetMapping("/utente/{email}")
     public Utente findByEmail(@PathVariable String email){
         return utenteRepository.findUtenteByEmail(email);
@@ -122,23 +116,22 @@ public class UserController {
 
 
     static class NuovaVotazione {
-        public Utente votante;
         public Utente votato;
         public int voto;
     }
     @CrossOrigin("*")
     @PostMapping("/votazione")
     public UtenteResponse votaUtente(@RequestBody NuovaVotazione nv){
-        Votazione v = new Votazione(utenteRepository.findUtenteByEmail(nv.votante.getEmail()),utenteRepository.findUtenteByEmail(nv.votato.getEmail()),nv.voto);
+        Votazione v = new Votazione(utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail()),utenteRepository.findUtenteByEmail(nv.votato.getEmail()),nv.voto);
         votazioneRepository.save(v);
         return new UtenteResponse(utenteRepository.findUtenteByEmail(nv.votato.getEmail()));
     }
 
 
     @CrossOrigin()
-    @GetMapping("/votazione/votante={votanteEmail}/votato={votatoEmail}")
-    public int getVoto(@PathVariable String votanteEmail, @PathVariable String votatoEmail){
-        Utente votante = utenteRepository.findUtenteByEmail(votanteEmail);
+    @GetMapping("/votazione/votato={votatoEmail}")
+    public int getVoto( @PathVariable String votatoEmail){
+        Utente votante = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
         Utente votato = utenteRepository.findUtenteByEmail(votatoEmail);
         return votazioneRepository.findByVotanteAndVotato(votante, votato).getVoto();
     }

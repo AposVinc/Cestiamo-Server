@@ -46,9 +46,9 @@ public class PartitaController {
 
 
     @CrossOrigin()
-    @GetMapping("/getListaMiePartite/utente={mail}")
-    public List<PartitaResponse> getListaMiePartite(@PathVariable String mail){
-        Utente u = cestiamoService.findUtenteByEmail(mail);
+    @GetMapping("/getListaMiePartite")
+    public List<PartitaResponse> getListaMiePartite(){
+        Utente u = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
         Set<Partita> partite = u.getPartiteFuture();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p :partite){
@@ -60,9 +60,9 @@ public class PartitaController {
     }
 
     @CrossOrigin()
-    @GetMapping("/getListaPartiteGiocate/utente={mail}")
-    public List<PartitaResponse> getListaPartiteGiocate(@PathVariable String mail){
-        Utente u = cestiamoService.findUtenteByEmail(mail);
+    @GetMapping("/getListaPartiteGiocate")
+    public List<PartitaResponse> getListaPartiteGiocate(){
+        Utente u = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
         Set<Partita> partite = u.getPartiteGiocate();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p : partite){
@@ -73,17 +73,12 @@ public class PartitaController {
         return  partiteResponse;
     }
 
-
-    static class NuovaPartita {
-        public Partita partita;
-        public Utente creatore;
-    }
-
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
     public PartitaResponse createPartita(@RequestBody Partita partita){
         Utente utente = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
         partita.addPartecipante(utente);
+        System.out.println(partita.getData());
         return new PartitaResponse(partitaRepository.save(partita));
     }
 
@@ -95,20 +90,19 @@ public class PartitaController {
     }
 
     @CrossOrigin()
-    @PutMapping("/addPartecipante/partita={id_p}/utente={mail_u}")
-    public PartitaResponse addPartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
+    @PutMapping("/addPartecipante/partita={id_p}")
+    public PartitaResponse addPartecipante(@PathVariable Long id_p){
         Partita p = partitaRepository.findPartitaById(id_p);
-        p.addPartecipante(cestiamoService.findUtenteByEmail(mail_u));
-
+        p.addPartecipante(utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail()));
         partitaRepository.save(p);
         return new PartitaResponse(p);
     }
 
     @CrossOrigin()
-    @DeleteMapping("/removePartecipante/partita={id_p}/utente={mail_u}")
-    public void deletePartecipante(@PathVariable Long id_p, @PathVariable String mail_u){
+    @DeleteMapping("/removePartecipante/partita={id_p}")
+    public void deletePartecipante(@PathVariable Long id_p){
         Partita p = partitaRepository.findPartitaById(id_p);
-        p.removePartecipante(cestiamoService.findUtenteByEmail(mail_u));
+        p.removePartecipante(utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail()));
         partitaRepository.save(p);
     }
 
