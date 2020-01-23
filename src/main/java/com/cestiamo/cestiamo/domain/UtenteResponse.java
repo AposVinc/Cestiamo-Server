@@ -9,6 +9,7 @@ public class UtenteResponse {
     private String email;
     private String password;
     private String citta;
+    private String via;
     private LocalDate dataNascita;
     private int numPartite;
     private int mediaVoto;
@@ -23,6 +24,7 @@ public class UtenteResponse {
         this.email=u.getEmail();
         this.password=u.getPassword();
         this.citta=u.getCitta();
+        this.via=u.getVia();
         this.dataNascita=u.getDataNascita();
         this.numPartite=u.getNumPartite();
         this.mediaVoto=u.getMediaVoto();
@@ -69,6 +71,14 @@ public class UtenteResponse {
         this.citta = citta;
     }
 
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
+    }
+
     public LocalDate getDataNascita() {
         return dataNascita;
     }
@@ -101,6 +111,7 @@ public class UtenteResponse {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", citta='" + citta + '\'' +
+                ", via='" + via + '\'' +
                 ", dataNascita=" + dataNascita +
                 ", numPartite=" + numPartite +
                 ", mediaVoto=" + mediaVoto +
