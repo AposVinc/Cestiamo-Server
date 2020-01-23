@@ -79,4 +79,15 @@ public class PartitaResponse {
         this.personeMancanti = this.tipologia.getN_giocatori() - this.partecipanti.size();
     }
 
+    @Override
+    public String toString() {
+        return "PartitaResponse{" +
+                "id=" + id +
+                ", tipologia=" + tipologia +
+                ", campo=" + campo +
+                ", data=" + data +
+                ", partecipanti=" + partecipanti +
+                ", personeMancanti=" + personeMancanti +
+                '}';
+    }
 }

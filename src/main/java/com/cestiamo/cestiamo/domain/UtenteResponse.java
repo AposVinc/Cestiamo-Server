@@ -93,4 +93,18 @@ public class UtenteResponse {
         this.img = img;
     }
 
+    @Override
+    public String toString() {
+        return "UtenteResponse{" +
+                "nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", citta='" + citta + '\'' +
+                ", dataNascita=" + dataNascita +
+                ", numPartite=" + numPartite +
+                ", mediaVoto=" + mediaVoto +
+                ", img='" + img + '\'' +
+                '}';
+    }
 }

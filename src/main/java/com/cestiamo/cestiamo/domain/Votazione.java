@@ -132,4 +132,15 @@ public class Votazione {
     public int hashCode() {
         return Objects.hash(votante, votato);
     }
+
+
+    @Override
+    public String toString() {
+        return "Votazione{" +
+                "id=" + id +
+                ", votante=" + votante +
+                ", votato=" + votato +
+                ", voto=" + voto +
+                '}';
+    }
 }

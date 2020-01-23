@@ -44,4 +44,12 @@ public class TipoPartita {
         this.n_giocatori = quantita;
     }
 
+    @Override
+    public String toString() {
+        return "TipoPartita{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", n_giocatori=" + n_giocatori +
+                '}';
+    }
 }

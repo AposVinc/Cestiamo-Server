@@ -115,4 +115,16 @@ public class Partita {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Partita{" +
+                "id=" + id +
+                ", campo=" + campo +
+                ", data=" + data +
+                ", tipologia=" + tipologia +
+                ", messaggi=" + messaggi +
+                ", partecipanti=" + partecipanti +
+                '}';
+    }
 }
