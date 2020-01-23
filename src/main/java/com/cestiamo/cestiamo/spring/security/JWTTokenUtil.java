@@ -1,18 +1,19 @@
 package com.cestiamo.cestiamo.spring.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTTokenUtil implements Serializable{
@@ -24,6 +25,10 @@ public class JWTTokenUtil implements Serializable{
     static final String CLAIM_KEY_CREATED = "iat";
     static final String CLAIM_KEY_AUTHORITIES = "roles";
     static final String CLAIM_KEY_IS_ENABLED = "isEnabled";
+    /*
+     * private static final String AUDIENCE_UNKNOWN = "unknown"; private static
+     * final String AUDIENCE_WEB = "web";
+     */
     private static final String AUDIENCE_MOBILE = "mobile";
     private static final String AUDIENCE_TABLET = "tablet";
 

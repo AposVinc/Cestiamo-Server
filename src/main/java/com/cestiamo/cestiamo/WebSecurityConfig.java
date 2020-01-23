@@ -78,8 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and().authorizeRequests()
 
                 //Specificare le url che sono soggette ad autenticazione ed autorizzazione
-                .antMatchers("/", "/**","/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/api/login**", "/api/creaUtente**").permitAll();
-                //.antMatchers("/api/creaVeicolo**","/api/getVeicoli**" ).authenticated();
+                .antMatchers("/", "/**","/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/api/login**", "/api/creaUtente**").permitAll()
+                .antMatchers("/api/updateUtente**","/api/updateImage**","/api/votazione**","/api/nuovaPartita**","/api/getListaMiePartite**","/api/getListaPartiteGiocate**","/api/addPartecipante**","/api/removePartecipante**","/api/partita_bacheca/**" ).authenticated();
 
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
