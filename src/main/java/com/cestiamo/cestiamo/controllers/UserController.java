@@ -107,14 +107,10 @@ public class UserController {
         return new UtenteResponse(u);
     }
 
-    static class Immagine {
-        public Utente proprietario;
-        public byte[] image;
-    }
     @CrossOrigin("*")
     @PostMapping("/updateImage")
     public UtenteResponse updateImage(@RequestBody byte[] image){
-        Utente utente = Utility.getUtente();
+        Utente utente = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
         try {
             utente.setImg(image);
             utenteRepository.save(utente);
