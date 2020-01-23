@@ -1,13 +1,12 @@
 package com.cestiamo.cestiamo.controllers;
 
+import com.cestiamo.cestiamo.Utility;
 import com.cestiamo.cestiamo.business.CestiamoService;
 import com.cestiamo.cestiamo.business.impl.repositories.MessaggioRepository;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
-import com.cestiamo.cestiamo.domain.Messaggio;
-import com.cestiamo.cestiamo.domain.Partita;
-import com.cestiamo.cestiamo.domain.PartitaResponse;
+import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
+import com.cestiamo.cestiamo.domain.*;
 
-import com.cestiamo.cestiamo.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +23,7 @@ public class PartitaController {
     PartitaRepository partitaRepository;
 
     @Autowired
-    UserController utenteRepository;
+    UtenteRepository utenteRepository;
 
     @Autowired
     MessaggioRepository messaggioRepository;
@@ -82,13 +81,10 @@ public class PartitaController {
 
     @CrossOrigin()
     @PostMapping("/nuovaPartita")
-    public PartitaResponse createPartita(@RequestBody NuovaPartita np){
-        Utente utente = utenteRepository.findByEmail(np.creatore.getEmail());
-        System.out.println(utente.getEmail());
-        np.partita.addPartecipante(utente);
-        System.out.println(utente);
-        System.out.println(np.partita);
-        return new PartitaResponse(partitaRepository.save(np.partita));
+    public PartitaResponse createPartita(@RequestBody Partita partita){
+        Utente utente = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
+        partita.addPartecipante(utente);
+        return new PartitaResponse(partitaRepository.save(partita));
     }
 
     @CrossOrigin()
@@ -127,7 +123,7 @@ public class PartitaController {
     @PostMapping("/partita_bacheca/{id}/addMessaggio")
     public Messaggio addMessaggio(@PathVariable Long id, @RequestBody Messaggio msg) {
         Partita p = partitaRepository.findPartitaById(id);
-        Messaggio m = new Messaggio(utenteRepository.findByEmail(msg.getMittente().getEmail()), msg.getData(), msg.getTesto(), p);
+        Messaggio m = new Messaggio(utenteRepository.findUtenteByEmail(msg.getMittente().getEmail()), msg.getData(), msg.getTesto(), p);
 
         return messaggioRepository.save(m);
     }
