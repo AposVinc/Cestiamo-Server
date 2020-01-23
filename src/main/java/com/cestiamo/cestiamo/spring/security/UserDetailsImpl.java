@@ -14,7 +14,9 @@ public class UserDetailsImpl implements UserDetails {
 
     private Utente utente;
 
-    public UserDetailsImpl(Utente utente){this.utente=utente;}
+    public UserDetailsImpl(Utente utente){
+        this.utente=utente;
+    }
 
     @Override
     public String getUsername() {

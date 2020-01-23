@@ -13,7 +13,6 @@ public class Utility {
         if (authentication != null) {
             UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
             return userDetailsImpl.getUtente();
-
         } else {
             return null;
         }
