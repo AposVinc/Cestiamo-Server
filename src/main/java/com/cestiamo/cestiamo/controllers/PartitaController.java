@@ -117,14 +117,14 @@ public class PartitaController {
     }
 
     @CrossOrigin()
-    @GetMapping("/partita/{id}/bacheca")
+    @GetMapping("/partita_bacheca/{id}")
     public Set<Messaggio> findMessaggiByIdPartita(@PathVariable Long id){
         Partita p = partitaRepository.findPartitaById(id);
         return p.getMessaggi();
     }
 
     @CrossOrigin()
-    @PostMapping("/partita/{id}/bacheca/addMessaggio")
+    @PostMapping("/partita_bacheca/{id}/addMessaggio")
     public Messaggio addMessaggio(@PathVariable Long id, @RequestBody Messaggio msg) {
         Partita p = partitaRepository.findPartitaById(id);
         Messaggio m = new Messaggio(utenteRepository.findByEmail(msg.getMittente().getEmail()), msg.getData(), msg.getTesto(), p);
