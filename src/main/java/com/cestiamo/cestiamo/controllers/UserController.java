@@ -80,7 +80,6 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String token = jwtTokenUtil.generateToken(userDetails);
-        System.out.println("token: " + token);
         response.setHeader(tokenHeader, token);
         return new UtenteResponse( ((UserDetailsImpl) userDetails).getUtente() );
     }
