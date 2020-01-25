@@ -22,4 +22,6 @@ public interface CestiamoService {
 
     Partita findPartitaById(Long id) throws BusinessException;
 
+    Campo findCampoById(Long id) throws BusinessException;
+
 }

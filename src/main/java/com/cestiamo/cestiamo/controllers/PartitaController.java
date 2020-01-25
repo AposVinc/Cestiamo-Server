@@ -2,6 +2,7 @@ package com.cestiamo.cestiamo.controllers;
 
 import com.cestiamo.cestiamo.Utility;
 import com.cestiamo.cestiamo.business.CestiamoService;
+import com.cestiamo.cestiamo.business.impl.repositories.CampoRepository;
 import com.cestiamo.cestiamo.business.impl.repositories.MessaggioRepository;
 import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
 import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
@@ -26,6 +27,9 @@ public class PartitaController {
     UtenteRepository utenteRepository;
 
     @Autowired
+    CampoRepository campoRepository;
+
+    @Autowired
     MessaggioRepository messaggioRepository;
 
     @Autowired
@@ -39,7 +43,8 @@ public class PartitaController {
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p: partite) {
             if (p.getData().isAfter(LocalDateTime.now())){
-            partiteResponse.add(new PartitaResponse(p));}
+            partiteResponse.add(new PartitaResponse(p));
+            }
         }
         return partiteResponse;
     }
@@ -71,6 +76,20 @@ public class PartitaController {
             }
         }
         return  partiteResponse;
+    }
+
+    @CrossOrigin()
+    @GetMapping("/getListaPartite/campo={id}")
+    public List<PartitaResponse> getPartiteByCampo(@PathVariable Long id) {
+        Campo campo = campoRepository.findCampoById(id);
+        Set<Partita> partite = campo.getPartite();
+        List<PartitaResponse> partiteResponse = new ArrayList<>();
+        for (Partita p: partite) {
+            if (p.getData().isAfter(LocalDateTime.now())) {
+                partiteResponse.add(new PartitaResponse(p));
+            }
+        }
+        return partiteResponse;
     }
 
     @CrossOrigin()

@@ -65,4 +65,10 @@ public class CestiamoServiceImpl implements CestiamoService {
     }
 
 
+    @Override
+    public Campo findCampoById(Long id) throws BusinessException {
+        return campoRepository.findById(id).get();
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package com.cestiamo.cestiamo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +24,9 @@ public class Campo {
     @Column(name = "TELEFONO", length = 20)
     private String telefono;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "campo")
+    private Set<Partita> partite = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -53,6 +58,14 @@ public class Campo {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public Set<Partita> getPartite() {
+        return partite;
+    }
+
+    public void setPartite(Set<Partita> partite) {
+        this.partite = partite;
     }
 
 }
