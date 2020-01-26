@@ -109,6 +109,16 @@ public class PartitaController {
     }
 
     @CrossOrigin()
+    @GetMapping("/isPartecipante/partita/{id}")
+    public boolean checkIfUtenteLoggatoPartecipate(@PathVariable Long id){
+        Utente u = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
+        Partita p = partitaRepository.findPartitaById(id);
+
+        return u.isPartecipante(p);
+    }
+
+
+    @CrossOrigin()
     @PutMapping("/addPartecipante/partita={id_p}")
     public PartitaResponse addPartecipante(@PathVariable Long id_p){
         Partita p = partitaRepository.findPartitaById(id_p);

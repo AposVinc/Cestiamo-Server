@@ -45,6 +45,10 @@ public class Utente {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Partita> partite = new HashSet<>();
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy("data desc")
 	private Set<Partita> partiteGiocate = new HashSet<>();
 
@@ -128,33 +132,27 @@ public class Utente {
 		this.dataNascita = d_nascita;
 	}
 
+	public boolean isPartecipante(Partita partita) {
+		return partita.getPartecipanti().contains(this);
+	}
+
+	public Set<Partita> getPartite() { return partite; }
+
+	public void setPartite(Set<Partita> partite) {
+		this.partite = partite;
+	}
+
+	public void addPartita(Partita partita){
+		this.partite.add(partita);
+	}
+
+	public void removePartita(Partita partita){
+		this.partite.remove(partita);
+	}
+
 	public Set<Partita> getPartiteFuture() { return partiteFuture; }
 
-	public void setPartiteFuture(Set<Partita> partite_future) {
-		this.partiteFuture = partite_future;
-	}
-
-	public void addPartitaFutura(Partita partita){
-		this.partiteFuture.add(partita);
-	}
-
-	public void removePartitaFutura(Partita partita){
-		this.partiteFuture.remove(partita);
-	}
-
 	public Set<Partita> getPartiteGiocate() { return partiteGiocate; }
-
-	public void setPartiteGiocate(Set<Partita> partite_giocate) {
-		this.partiteGiocate = partite_giocate;
-	}
-
-	public void addPartitaGiocata(Partita partita){
-		this.partiteGiocate.add(partita);
-	}
-
-	public void removePartitaGiocata(Partita partita){
-		this.partiteGiocate.remove(partita);
-	}
 
 	public int getNumPartite() {
 		return partiteGiocate.size();
