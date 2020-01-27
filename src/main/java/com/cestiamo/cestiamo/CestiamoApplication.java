@@ -252,7 +252,7 @@ public class CestiamoApplication {
 
                 Partita p3 = new Partita();
                 p3.setCampo(c.get(1));
-                p3.setData(LocalDateTime.of(2020,4,4,13,15));
+                p3.setData(LocalDateTime.of(2020,6,4,13,15));
 
                 p3.setTipologia(t.get(1));
                 partitaRepository.save(p3);
@@ -295,6 +295,59 @@ public class CestiamoApplication {
                 partecipantiP5.add(u.get(3));
                 p5.setPartecipanti(partecipantiP5);
                 partitaRepository.save(p5);
+
+                Partita p6 = new Partita();
+                p6.setCampo(c.get(4));
+                p6.setData(LocalDateTime.of(2019,8,7,18,0));
+
+                p6.setTipologia(t.get(2));
+                partitaRepository.save(p6);
+
+                Set<Utente> partecipantiP6 = new HashSet<>();
+                partecipantiP6.add(u.get(0));
+                partecipantiP6.add(u.get(1));
+                partecipantiP6.add(u.get(2));
+                partecipantiP6.add(u.get(3));
+                partecipantiP6.add(u.get(4));
+                p6.setPartecipanti(partecipantiP6);
+                partitaRepository.save(p6);
+
+
+                Partita p7 = new Partita();
+                p7.setCampo(c.get(5));
+                p7.setData(LocalDateTime.of(2020,7,25,21,0));
+
+                p7.setTipologia(t.get(4));
+                partitaRepository.save(p7);
+
+                Set<Utente> partecipantiP7 = new HashSet<>();
+                partecipantiP7.add(u.get(0));
+                partecipantiP7.add(u.get(1));
+                partecipantiP7.add(u.get(2));
+                partecipantiP7.add(u.get(3));
+                partecipantiP7.add(u.get(4));
+                partecipantiP7.add(u.get(5));
+                p7.setPartecipanti(partecipantiP7);
+                partitaRepository.save(p7);
+
+
+                Partita p8 = new Partita();
+                p8.setCampo(c.get(5));
+                p8.setData(LocalDateTime.of(2020,5,13,14,0));
+
+                p8.setTipologia(t.get(3));
+                partitaRepository.save(p8);
+
+                Set<Utente> partecipantiP8 = new HashSet<>();
+                partecipantiP8.add(u.get(0));
+                partecipantiP8.add(u.get(1));
+                partecipantiP8.add(u.get(2));
+                partecipantiP8.add(u.get(3));
+                partecipantiP8.add(u.get(4));
+                partecipantiP8.add(u.get(5));
+                p8.setPartecipanti(partecipantiP8);
+                partitaRepository.save(p8);
+
 
                 System.out.println('\n' + "Partite SALVATE" +'\n');
 
