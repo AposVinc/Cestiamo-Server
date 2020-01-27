@@ -223,7 +223,6 @@ public class CestiamoApplication {
                 Partita p1 = new Partita();
                 p1.setCampo(c.get(0));
                 p1.setData(LocalDateTime.of(2020,3,25,19,30));
-
                 p1.setTipologia(t.get(0));
                 partitaRepository.save(p1);
 
@@ -237,7 +236,6 @@ public class CestiamoApplication {
                 Partita p2 = new Partita();
                 p2.setCampo(c.get(1));
                 p2.setData(LocalDateTime.of(2020,5,12,18,0));
-
                 p2.setTipologia(t.get(1));
                 partitaRepository.save(p2);
 
@@ -252,11 +250,10 @@ public class CestiamoApplication {
 
                 Partita p3 = new Partita();
                 p3.setCampo(c.get(1));
-                p3.setData(LocalDateTime.of(2020,6,4,13,15));
+                p3.setData(LocalDateTime.of(2020,6,4,13,30));
 
                 p3.setTipologia(t.get(1));
                 partitaRepository.save(p3);
-
                 Set<Utente> partecipantiP3 = new HashSet<>();
                 partecipantiP3.add(u.get(0));
                 partecipantiP3.add(u.get(1));
@@ -265,10 +262,10 @@ public class CestiamoApplication {
 
                 partitaRepository.save(p3);
 
+                
                 Partita p4 = new Partita();
                 p4.setCampo(c.get(1));
                 p4.setData(LocalDateTime.of(2020,1,4,18,0));
-
                 p4.setTipologia(t.get(1));
                 partitaRepository.save(p4);
 
@@ -284,7 +281,6 @@ public class CestiamoApplication {
                 Partita p5 = new Partita();
                 p5.setCampo(c.get(2));
                 p5.setData(LocalDateTime.of(2019,11,27,22,0));
-
                 p5.setTipologia(t.get(1));
                 partitaRepository.save(p5);
 
@@ -296,10 +292,10 @@ public class CestiamoApplication {
                 p5.setPartecipanti(partecipantiP5);
                 partitaRepository.save(p5);
 
+
                 Partita p6 = new Partita();
                 p6.setCampo(c.get(4));
                 p6.setData(LocalDateTime.of(2019,8,7,18,0));
-
                 p6.setTipologia(t.get(2));
                 partitaRepository.save(p6);
 
@@ -316,7 +312,6 @@ public class CestiamoApplication {
                 Partita p7 = new Partita();
                 p7.setCampo(c.get(5));
                 p7.setData(LocalDateTime.of(2020,7,25,21,0));
-
                 p7.setTipologia(t.get(4));
                 partitaRepository.save(p7);
 
@@ -334,7 +329,6 @@ public class CestiamoApplication {
                 Partita p8 = new Partita();
                 p8.setCampo(c.get(5));
                 p8.setData(LocalDateTime.of(2020,5,13,14,0));
-
                 p8.setTipologia(t.get(3));
                 partitaRepository.save(p8);
 
@@ -347,7 +341,6 @@ public class CestiamoApplication {
                 partecipantiP8.add(u.get(5));
                 p8.setPartecipanti(partecipantiP8);
                 partitaRepository.save(p8);
-
 
                 System.out.println('\n' + "Partite SALVATE" +'\n');
 

@@ -184,11 +184,15 @@ public class Utente {
 	}
 	
 	public int getMediaVoto(){
-		int tot = 0;
-		for (Votazione v: votazioniRicevute) {
-			tot += v.getVoto();
+		if (votazioniRicevute.size() != 0) {
+			int tot = 0;
+			for (Votazione v : votazioniRicevute) {
+				tot += v.getVoto();
+			}
+			return tot / votazioniRicevute.size();
+		} else {
+			return 0;
 		}
-		return tot/votazioniRicevute.size();
 	}
 
 	public byte[] getImg() {
