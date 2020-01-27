@@ -111,7 +111,6 @@ public class PartitaController {
     @GetMapping("/getListaPartite/data={dataString}")
     public List<PartitaResponse> getPartiteByData(@PathVariable String dataString) {
         LocalDate data = LocalDate.parse(dataString);
-        System.out.println(data);
         List<Partita> partite = partitaRepository.findAll();
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p: partite) {
@@ -143,7 +142,6 @@ public class PartitaController {
     public boolean checkIfUtenteLoggatoPartecipate(@PathVariable Long id){
         Utente u = utenteRepository.findUtenteByEmail(Utility.getUtente().getEmail());
         Partita p = partitaRepository.findPartitaById(id);
-
         return u.isPartecipante(p);
     }
 
@@ -177,7 +175,6 @@ public class PartitaController {
     public Messaggio addMessaggio(@PathVariable Long id, @RequestBody Messaggio msg) {
         Partita p = partitaRepository.findPartitaById(id);
         Messaggio m = new Messaggio(utenteRepository.findUtenteByEmail(msg.getMittente().getEmail()), msg.getData(), msg.getTesto(), p);
-
         return messaggioRepository.save(m);
     }
 

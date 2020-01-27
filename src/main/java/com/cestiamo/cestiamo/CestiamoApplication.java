@@ -36,7 +36,6 @@ public class CestiamoApplication {
                 mrossi.setDataNascita(LocalDate.of(1990,5,25));
 				mrossi.setImg(new byte[0]);
 				utenteRepository.save(mrossi);
-				System.out.println("SALVATO Mario Rossi");
 
 				Utente gverdi = new Utente();
                 gverdi.setNome("Giuseppe");
@@ -44,11 +43,10 @@ public class CestiamoApplication {
                 gverdi.setEmail("giuseppe.verdi@mail.it");
                 gverdi.setPassword(passwordEncoder.encode("123456789"));
                 gverdi.setCitta("Milano");
-                gverdi.setVia("Via dei Piccolomini, 80");
+                gverdi.setVia("Via Aida, 80");
                 gverdi.setDataNascita(LocalDate.of(1995,2,11));
                 gverdi.setImg(new byte[0]);
 				utenteRepository.save(gverdi);
-				System.out.println("SALVATO Giuseppe Verdi");
 
 				Utente aBianchi = new Utente();
 				aBianchi.setNome("Antonio");
@@ -60,7 +58,6 @@ public class CestiamoApplication {
                 aBianchi.setDataNascita(LocalDate.of(1980,6,5));
 				aBianchi.setImg(new byte[0]);
 				utenteRepository.save(aBianchi);
-				System.out.println("SALVATO Antonio Bianchi");
 
 				Utente gMazzini = new Utente();
                 gMazzini.setNome("Giuseppe");
@@ -72,7 +69,50 @@ public class CestiamoApplication {
                 gMazzini.setDataNascita(LocalDate.of(1969,12,30));
                 gMazzini.setImg(new byte[0]);
 				utenteRepository.save(gMazzini);
-				System.out.println("SALVATO Giuseppe Mazzini");
+
+				Utente vapostolo = new Utente();
+                vapostolo.setNome("Vincenzo");
+                vapostolo.setCognome("Aposolo");
+                vapostolo.setEmail("vincenzo.apostolo@mail.it");
+                vapostolo.setPassword(passwordEncoder.encode("123456789"));
+                vapostolo.setCitta("Avezzano");
+                vapostolo.setVia("Australia, 44");
+                vapostolo.setDataNascita(LocalDate.of(1995,11,4));
+                vapostolo.setImg(new byte[0]);
+				utenteRepository.save(vapostolo);
+
+				Utente ffegatilli = new Utente();
+                ffegatilli.setNome("Francesco");
+                ffegatilli.setCognome("Fegatilli");
+                ffegatilli.setEmail("francesco.fegatilli@mail.it");
+                ffegatilli.setPassword(passwordEncoder.encode("123456789"));
+                ffegatilli.setCitta("Celano");
+                ffegatilli.setVia("Via Piccolomini, 80");
+                ffegatilli.setDataNascita(LocalDate.of(1994,4,17));
+                ffegatilli.setImg(new byte[0]);
+				utenteRepository.save(ffegatilli);
+
+				Utente ftotti = new Utente();
+                ftotti.setNome("Francesco");
+                ftotti.setCognome("Totti");
+                ftotti.setEmail("francesco.totti@mail.it");
+                ftotti.setPassword(passwordEncoder.encode("123456789"));
+                ftotti.setCitta("Roma");
+                ftotti.setVia("Lungotevere, 10");
+                ftotti.setDataNascita(LocalDate.of(1970,6,5));
+                ftotti.setImg(new byte[0]);
+				utenteRepository.save(ftotti);
+
+				Utente atomba = new Utente();
+                atomba.setNome("Alberto");
+                atomba.setCognome("Tomba");
+                atomba.setEmail("alberto.tomba@mail.it");
+                atomba.setPassword(passwordEncoder.encode("123456789"));
+                atomba.setCitta("Bologna");
+                atomba.setVia("Via Verdi, 94");
+                atomba.setDataNascita(LocalDate.of(1966,12,19));
+                atomba.setImg(new byte[0]);
+				utenteRepository.save(atomba);
 
                 System.out.println('\n' + "Utenti salvati"+'\n');
 			} catch (Exception ex) {
@@ -150,9 +190,27 @@ public class CestiamoApplication {
                 c3.setVia("Via Della Croce Rossa, 75");
                 c3.setTelefono("328 4141250");
 
+                Campo c4 = new Campo();
+                c4.setCitta("Milano");
+                c4.setVia("Via Roma, 23");
+                c4.setTelefono("347 9525667");
+
+                Campo c5 = new Campo();
+                c5.setCitta("Chieti");
+                c5.setVia("Via Verdi, 15");
+                c5.setTelefono("347 23567786");
+
+                Campo c6 = new Campo();
+                c6.setCitta("Pescara");
+                c6.setVia("Piazza Salotto, 43");
+                c6.setTelefono("328 24516250");
+
                 campoRepository.save(c1);
                 campoRepository.save(c2);
                 campoRepository.save(c3);
+                campoRepository.save(c4);
+                campoRepository.save(c5);
+                campoRepository.save(c6);
 
                 System.out.println('\n' + "Campi SALVATI" +'\n' );
             } catch (Exception ex) {
