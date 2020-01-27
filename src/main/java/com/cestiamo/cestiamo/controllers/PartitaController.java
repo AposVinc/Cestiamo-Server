@@ -2,15 +2,13 @@ package com.cestiamo.cestiamo.controllers;
 
 import com.cestiamo.cestiamo.Utility;
 import com.cestiamo.cestiamo.business.CestiamoService;
-import com.cestiamo.cestiamo.business.impl.repositories.CampoRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.MessaggioRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.PartitaRepository;
-import com.cestiamo.cestiamo.business.impl.repositories.UtenteRepository;
+import com.cestiamo.cestiamo.business.impl.repositories.*;
 import com.cestiamo.cestiamo.domain.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +26,9 @@ public class PartitaController {
 
     @Autowired
     CampoRepository campoRepository;
+
+    @Autowired
+    TipoPartitaRepository tipoPartitaRepository;
 
     @Autowired
     MessaggioRepository messaggioRepository;
@@ -86,6 +87,35 @@ public class PartitaController {
         List<PartitaResponse> partiteResponse = new ArrayList<>();
         for (Partita p: partite) {
             if (p.getData().isAfter(LocalDateTime.now())) {
+                partiteResponse.add(new PartitaResponse(p));
+            }
+        }
+        return partiteResponse;
+    }
+
+    @CrossOrigin()
+    @GetMapping("/getListaPartite/tipologia={id}")
+    public List<PartitaResponse> getPartiteByTipologia(@PathVariable Long id) {
+        TipoPartita tipo = tipoPartitaRepository.findTipoPartitaById(id);
+        Set<Partita> partite = tipo.getPartite();
+        List<PartitaResponse> partiteResponse = new ArrayList<>();
+        for (Partita p: partite) {
+            if (p.getData().isAfter(LocalDateTime.now())) {
+                partiteResponse.add(new PartitaResponse(p));
+            }
+        }
+        return partiteResponse;
+    }
+
+    @CrossOrigin()
+    @GetMapping("/getListaPartite/data={dataString}")
+    public List<PartitaResponse> getPartiteByData(@PathVariable String dataString) {
+        LocalDate data = LocalDate.parse(dataString);
+        System.out.println(data);
+        List<Partita> partite = partitaRepository.findAll();
+        List<PartitaResponse> partiteResponse = new ArrayList<>();
+        for (Partita p: partite) {
+            if (p.getData().toLocalDate().isEqual(data)) {
                 partiteResponse.add(new PartitaResponse(p));
             }
         }

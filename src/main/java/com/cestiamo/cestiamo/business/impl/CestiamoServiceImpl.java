@@ -64,10 +64,14 @@ public class CestiamoServiceImpl implements CestiamoService {
         partitaRepository.save(partita);
     }
 
-
     @Override
     public Campo findCampoById(Long id) throws BusinessException {
         return campoRepository.findById(id).get();
+    }
+
+    @Override
+    public TipoPartita findTipoPartitaById(Long id) throws BusinessException {
+        return tipoPartitaRepository.findById(id).get();
     }
 
 

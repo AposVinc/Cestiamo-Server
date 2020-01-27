@@ -26,6 +26,7 @@ public class Campo {
 
     @JsonIgnore
     @OneToMany(mappedBy = "campo")
+    @OrderBy("data asc ")
     private Set<Partita> partite = new HashSet<>();
 
     public Long getId() {

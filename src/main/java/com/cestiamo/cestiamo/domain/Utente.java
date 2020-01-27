@@ -44,6 +44,7 @@ public class Utente {
 	private Messaggio messaggio;
 
 	@JsonIgnore
+	@OrderBy("data asc ")
 	@ManyToMany(mappedBy = "partecipanti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Partita> partite = new HashSet<>();
 

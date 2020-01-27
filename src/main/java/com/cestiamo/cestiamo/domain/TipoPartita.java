@@ -1,6 +1,10 @@
 package com.cestiamo.cestiamo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "TipoPartita")
@@ -16,10 +20,12 @@ public class TipoPartita {
 
     @Column(name = "NUMERO_GIOCATORI", length = 255, nullable = false)
     private int n_giocatori;
-/*
-    @OneToMany(mappedBy = "tipopartita")
-    private Set<Partita> partite = new HashSet<Partita>();
-*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "tipologia")
+    @OrderBy("data asc ")
+    private Set<Partita> partite = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -42,6 +48,14 @@ public class TipoPartita {
 
     public void setN_giocatori(int quantita) {
         this.n_giocatori = quantita;
+    }
+
+    public Set<Partita> getPartite() {
+        return partite;
+    }
+
+    public void setPartite(Set<Partita> partite) {
+        this.partite = partite;
     }
 
     @Override
