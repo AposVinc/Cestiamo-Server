@@ -251,15 +251,14 @@ public class CestiamoApplication {
                 Partita p3 = new Partita();
                 p3.setCampo(c.get(1));
                 p3.setData(LocalDateTime.of(2020,6,4,13,30));
-
                 p3.setTipologia(t.get(1));
                 partitaRepository.save(p3);
+
                 Set<Utente> partecipantiP3 = new HashSet<>();
                 partecipantiP3.add(u.get(0));
                 partecipantiP3.add(u.get(1));
                 partecipantiP3.add(u.get(2));
                 p3.setPartecipanti(partecipantiP3);
-
                 partitaRepository.save(p3);
 
                 
@@ -372,6 +371,37 @@ public class CestiamoApplication {
                 messaggioRepository.save(m1);
                 messaggioRepository.save(m2);
                 messaggioRepository.save(m3);
+
+                Messaggio m4 = new Messaggio();
+                m4.setMittente(u.get(1));
+                m4.setData(LocalDateTime.of(2020,5,4,10,3));
+                m4.setTesto("Ciao, ragazzi! Pronti per la partita?");
+                m4.setPartita(p.get(2));
+
+                Messaggio m5 = new Messaggio();
+                m5.setMittente(u.get(0));
+                m5.setData(LocalDateTime.of(2020,6,4,11,3));
+                m5.setTesto("Ci vediamo tra poco!");
+                m5.setPartita(p.get(2));
+
+                messaggioRepository.save(m4);
+                messaggioRepository.save(m5);
+
+                Messaggio m6 = new Messaggio();
+                m6.setMittente(u.get(1));
+                m6.setData(LocalDateTime.of(2020,5,13,11,30));
+                m6.setTesto("Pronti per oggi?");
+                m6.setPartita(p.get(7));
+
+                Messaggio m7 = new Messaggio();
+                m7.setMittente(u.get(0));
+                m7.setData(LocalDateTime.of(2020,5,13,13,00));
+                m7.setTesto("A tra poco!");
+                m7.setPartita(p.get(7));
+
+                messaggioRepository.save(m6);
+                messaggioRepository.save(m7);
+
 
                 System.out.println('\n' + "Messaggi p2 SALVATE" +'\n');
 
