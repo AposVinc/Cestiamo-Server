@@ -132,6 +132,11 @@ public class CestiamoApplication {
 			    votazioneList.add(new Votazione(u.get(2),u.get(0),5));
 			    votazioneList.add(new Votazione(u.get(2),u.get(1),1));
 			    votazioneList.add(new Votazione(u.get(3),u.get(2),3));
+			    votazioneList.add(new Votazione(u.get(3),u.get(3),5));
+			    votazioneList.add(new Votazione(u.get(3),u.get(4),5));
+			    votazioneList.add(new Votazione(u.get(3),u.get(5),5));
+			    votazioneList.add(new Votazione(u.get(3),u.get(6),5));
+			    votazioneList.add(new Votazione(u.get(3),u.get(7),5));
 
                 votazioneRepository.saveAll(votazioneList);
 
